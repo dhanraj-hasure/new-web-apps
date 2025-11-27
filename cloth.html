@@ -40,6 +40,10 @@
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: 'Lato', sans-serif;
             background-color: var(--cream);
@@ -227,11 +231,85 @@
             width: 100%;
         }
 
-        .nav-icons {
-            display: flex;
-            gap: 20px;
-            font-size: 1.1rem;
+        /* --- MOBILE MENU --- */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: var(--primary);
+            margin: 3px 0;
+            transition: var(--transition);
+            border-radius: 2px;
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(8px, 8px);
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 280px;
+            height: 100vh;
+            background: white;
+            box-shadow: -5px 0 20px rgba(0, 0, 0, 0.1);
+            transition: right 0.4s ease;
+            z-index: 999;
+            padding: 80px 30px 30px;
+        }
+
+        .mobile-menu.active {
+            right: 0;
+        }
+
+        .mobile-menu a {
+            display: block;
+            padding: 15px 0;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
             color: var(--text-dark);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+        }
+
+        .mobile-menu a:hover {
+            color: var(--primary);
+            padding-left: 10px;
+        }
+
+        .menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            z-index: 998;
+        }
+
+        .menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
         }
 
         /* --- HERO SECTION --- */
@@ -255,7 +333,7 @@
             width: 100%;
             height: 100%;
             opacity: 0.6;
-            background-image: url('https://images.unsplash.com/photo-1610030469983-98e550d6193c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-image: url('https://karagiri.com/cdn/shop/files/Karagiri_Paithani_Saree_Maroon_Peacock_Pallu_1.jpg?v=1724673088&width=1946');
             background-size: cover;
             background-position: center 20%;
             background-attachment: fixed;
@@ -445,20 +523,7 @@
             overflow: hidden;
         }
 
-        .p-action {
-            position: absolute;
-            bottom: -50px;
-            left: 0;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.9);
-            padding: 15px;
-            text-align: center;
-            transition: var(--transition);
-        }
 
-        .product-card:hover .p-action {
-            bottom: 0;
-        }
 
         .p-details {
             padding: 20px;
@@ -563,6 +628,343 @@
             border-color: var(--gold);
         }
 
+        /* --- HERITAGE STORY --- */
+        .heritage-section {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .heritage-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .heritage-section h2 {
+            color: var(--gold);
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .heritage-section p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            opacity: 0.95;
+            margin-bottom: 20px;
+        }
+
+        /* --- CRAFTSMANSHIP PROCESS --- */
+        .process-section {
+            background: white;
+        }
+
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .process-item {
+            text-align: center;
+            padding: 30px 20px;
+            transition: var(--transition);
+        }
+
+        .process-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            background: var(--cream);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: var(--primary);
+            border: 3px solid var(--gold);
+            transition: var(--transition);
+        }
+
+        .process-item:hover .process-icon {
+            background: var(--primary);
+            color: var(--gold);
+            transform: scale(1.1);
+        }
+
+        .process-item h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .process-item p {
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* --- TESTIMONIALS --- */
+        .testimonials-section {
+            background: var(--cream);
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 4rem;
+            color: var(--gold);
+            font-family: 'Cinzel', serif;
+            opacity: 0.3;
+        }
+
+        .testimonial-text {
+            color: var(--text-dark);
+            font-style: italic;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .author-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .author-info h4 {
+            color: var(--primary);
+            font-size: 1rem;
+            margin-bottom: 3px;
+        }
+
+        .author-info p {
+            color: var(--text-light);
+            font-size: 0.85rem;
+        }
+
+        /* --- STATS SECTION --- */
+        .stats-section {
+            background: var(--primary);
+            color: white;
+            padding: 60px 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            text-align: center;
+        }
+
+        .stat-item h3 {
+            font-size: 3rem;
+            color: var(--gold);
+            margin-bottom: 10px;
+        }
+
+        .stat-item p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* --- CTA SECTION --- */
+        .cta-section {
+            background: linear-gradient(rgba(157, 2, 8, 0.95), rgba(106, 4, 15, 0.95)), 
+                        url('https://karagiri.com/cdn/shop/files/Karagiri_Paithani_Saree_Green_Peacock_Pallu_1.jpg?v=1724673088&width=1920');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+            text-align: center;
+        }
+
+        .cta-content {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .cta-section h2 {
+            font-size: 2.8rem;
+            color: var(--gold);
+            margin-bottom: 20px;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.95;
+        }
+
+        /* --- GALLERY SECTION --- */
+        .gallery-section {
+            background: white;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            height: 350px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            padding: 30px 20px 20px;
+            transform: translateY(100%);
+            transition: transform 0.4s ease;
+        }
+
+        .gallery-overlay h4 {
+            color: var(--gold);
+            font-size: 1.2rem;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+
+        /* --- CONTACT SECTION --- */
+        .contact-section {
+            background: var(--cream);
+        }
+
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            margin-top: 50px;
+        }
+
+        .contact-form {
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 5px;
+            font-family: 'Lato', sans-serif;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+        }
+
+        .contact-info-box {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .contact-item {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+        }
+
+        .contact-item i {
+            font-size: 1.5rem;
+            color: var(--primary);
+            background: white;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-item h4 {
+            color: var(--primary);
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+
+        .contact-item p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
         /* --- RESPONSIVE --- */
         @media (max-width: 768px) {
             .hero h1 {
@@ -571,6 +973,10 @@
 
             .nav-links {
                 display: none;
+            }
+
+            .menu-toggle {
+                display: flex;
             }
 
             .featured-wrapper {
@@ -593,6 +999,33 @@
                 width: 140px;
                 height: 140px;
             }
+
+            .heritage-section h2,
+            .cta-section h2 {
+                font-size: 2rem;
+            }
+
+            .stat-item h3 {
+                font-size: 2.5rem;
+            }
+
+            .process-grid,
+            .testimonial-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-wrapper {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-item {
+                height: 300px;
+            }
         }
 
         /* Reveal Animation */
@@ -613,6 +1046,19 @@
 
     <div class="bg-pattern"></div>
 
+    <!-- Mobile Menu Overlay -->
+    <div class="menu-overlay" id="menuOverlay"></div>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#home">Home</a>
+        <a href="#heritage">Heritage</a>
+        <a href="#collection">Collection</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#testimonials">Reviews</a>
+        <a href="#contact">Contact</a>
+    </div>
+
     <!-- Navigation -->
     <nav id="navbar">
         <div class="container nav-inner">
@@ -622,13 +1068,16 @@
             </a>
             <div class="nav-links">
                 <a href="#home">Home</a>
+                <a href="#heritage">Heritage</a>
                 <a href="#collection">Collection</a>
-                <a href="#paithani">Paithani</a>
-                <a href="#visit">Visit Us</a>
+                <a href="#gallery">Gallery</a>
+                <a href="#testimonials">Reviews</a>
+                <a href="#contact">Contact</a>
             </div>
-            <div class="nav-icons">
-                <a href="#"><i class="far fa-heart"></i></a>
-                <a href="#"><i class="fas fa-shopping-bag"></i></a>
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
         </div>
     </nav>
@@ -652,21 +1101,21 @@
             <div class="col-grid">
                 <div class="col-item fade-in">
                     <div class="col-img-box">
-                        <img src="https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+                        <img src="https://karagiri.com/cdn/shop/files/Karagiri_Paithani_Saree_Green_Peacock_Pallu_1.jpg?v=1724673088&width=400"
                             alt="Sarees">
                     </div>
                     <h3>Sarees</h3>
                 </div>
                 <div class="col-item fade-in">
                     <div class="col-img-box">
-                        <img src="https://images.unsplash.com/photo-1597983073493-88cd35cf93b0?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+                        <img src="https://karagiri.com/cdn/shop/files/Karagiri_Paithani_Saree_Pink_Peacock_Pallu_1.jpg?v=1724673088&width=400"
                             alt="Men's Ethnic">
                     </div>
                     <h3>Men's Kurta</h3>
                 </div>
                 <div class="col-item fade-in">
                     <div class="col-img-box">
-                        <img src="https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+                        <img src="https://karagiri.com/cdn/shop/files/Karagiri_Paithani_Saree_Purple_Peacock_Pallu_1.jpg?v=1724673088&width=400"
                             alt="Accessories">
                     </div>
                     <h3>Bridal</h3>
@@ -678,6 +1127,13 @@
     <!-- Featured Section (Paithani) -->
     <section id="paithani" class="section-padding featured-section">
         <div class="container">
+            <div class="text-center fade-in" style="margin-bottom: 60px;">
+                <h2 class="section-title">The Paithani Collection</h2>
+                <div class="divider-gold"></div>
+                <p style="max-width: 700px; margin: 0 auto; color: var(--text-light);">
+                    Discover the timeless elegance of authentic Yeola Paithani sarees, handwoven with pure silk and zari.
+                </p>
+            </div>
             <div class="featured-wrapper">
                 <div class="feat-content fade-in">
                     <h4 style="color: var(--text-light); letter-spacing: 2px;">THE ROYAL WEAVE</h4>
@@ -699,8 +1155,97 @@
 
                 <div class="feat-img-group fade-in">
                     <div class="feat-deco"></div>
-                    <img src="https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+                    <img src="https://karagiri.com/cdn/shop/files/Karagiri_Paithani_Saree_Maroon_Peacock_Pallu_1.jpg?v=1724673088&width=800"
                         alt="Paithani Saree" class="feat-main">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Heritage Story Section -->
+    <section id="heritage" class="section-padding heritage-section">
+        <div class="container">
+            <div class="heritage-content fade-in">
+                <h2>Our Heritage</h2>
+                <div class="divider-gold"></div>
+                <p>For over four decades, Avani Silks has been the custodian of Maharashtra's rich textile heritage. 
+                   What began as a small family venture in 1985 has blossomed into a celebrated destination for 
+                   authentic handwoven sarees and traditional ethnic wear.</p>
+                <p>We work directly with master weavers from Yeola, Paithan, and surrounding villages, ensuring 
+                   fair wages and preserving age-old weaving techniques that have been passed down through generations. 
+                   Every piece in our collection tells a story of dedication, artistry, and cultural pride.</p>
+                <p style="margin-top: 30px; font-size: 1rem; color: var(--gold); font-family: 'Cinzel', serif; 
+                   letter-spacing: 2px;">Tradition Woven with Love</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Craftsmanship Process -->
+    <section class="section-padding process-section">
+        <div class="container">
+            <div class="text-center fade-in">
+                <h2 class="section-title">The Art of Weaving</h2>
+                <div class="divider-gold"></div>
+                <p style="max-width: 700px; margin: 0 auto 20px; color: var(--text-light);">
+                    Each Paithani saree is a labor of love, crafted through a meticulous process that honors centuries of tradition.
+                </p>
+            </div>
+
+            <div class="process-grid">
+                <div class="process-item fade-in">
+                    <div class="process-icon">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <h3>Design Selection</h3>
+                    <p>Traditional motifs like peacocks, lotuses, and parrots are carefully chosen, each carrying symbolic meaning.</p>
+                </div>
+
+                <div class="process-item fade-in">
+                    <div class="process-icon">
+                        <i class="fas fa-fill-drip"></i>
+                    </div>
+                    <h3>Silk Dyeing</h3>
+                    <p>Pure silk threads are dyed in vibrant, natural colors that retain their brilliance for generations.</p>
+                </div>
+
+                <div class="process-item fade-in">
+                    <div class="process-icon">
+                        <i class="fas fa-hands"></i>
+                    </div>
+                    <h3>Handloom Weaving</h3>
+                    <p>Master weavers spend months intricately weaving each saree on traditional handlooms.</p>
+                </div>
+
+                <div class="process-item fade-in">
+                    <div class="process-icon">
+                        <i class="fas fa-gem"></i>
+                    </div>
+                    <h3>Zari Work</h3>
+                    <p>Real gold or silver zari threads are woven into borders and pallu, creating timeless elegance.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="stats-grid fade-in">
+                <div class="stat-item">
+                    <h3>40+</h3>
+                    <p>Years of Excellence</p>
+                </div>
+                <div class="stat-item">
+                    <h3>500+</h3>
+                    <p>Artisan Families</p>
+                </div>
+                <div class="stat-item">
+                    <h3>10,000+</h3>
+                    <p>Happy Customers</p>
+                </div>
+                <div class="stat-item">
+                    <h3>100%</h3>
+                    <p>Authentic Handwoven</p>
                 </div>
             </div>
         </div>
@@ -720,12 +1265,8 @@
                 <!-- Product 1 -->
                 <div class="product-card fade-in">
                     <div class="p-img">
-                        <img src="https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+                        <img src="https://karagiri.com/cdn/shop/files/Karagiri_Paithani_Saree_Blue_Peacock_Pallu_1.jpg?v=1724673088&width=600"
                             alt="Silk Saree">
-                        <div class="p-action">
-                            <button class="btn btn-gold" style="padding: 10px 20px; font-size: 0.8rem;">Add to
-                                Cart</button>
-                        </div>
                     </div>
                     <div class="p-details">
                         <span class="p-cat">Silk</span>
@@ -737,12 +1278,8 @@
                 <!-- Product 2 -->
                 <div class="product-card fade-in">
                     <div class="p-img">
-                        <img src="https://images.unsplash.com/photo-1597983073493-88cd35cf93b0?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+                        <img src="https://karagiri.com/cdn/shop/files/Karagiri_Paithani_Saree_Green_Peacock_Pallu_1.jpg?v=1724673088&width=600"
                             alt="Kurta">
-                        <div class="p-action">
-                            <button class="btn btn-gold" style="padding: 10px 20px; font-size: 0.8rem;">Add to
-                                Cart</button>
-                        </div>
                     </div>
                     <div class="p-details">
                         <span class="p-cat">Men's Ethnic</span>
@@ -754,17 +1291,26 @@
                 <!-- Product 3 -->
                 <div class="product-card fade-in">
                     <div class="p-img">
-                        <img src="https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+                        <img src="https://karagiri.com/cdn/shop/files/Karagiri_Paithani_Saree_Pink_Peacock_Pallu_1.jpg?v=1724673088&width=600"
                             alt="Cotton Saree">
-                        <div class="p-action">
-                            <button class="btn btn-gold" style="padding: 10px 20px; font-size: 0.8rem;">Add to
-                                Cart</button>
-                        </div>
                     </div>
                     <div class="p-details">
                         <span class="p-cat">Cotton</span>
                         <h4 class="p-title">Handblock Print</h4>
                         <span class="p-price">₹2,800</span>
+                    </div>
+                </div>
+
+                <!-- Product 4 -->
+                <div class="product-card fade-in">
+                    <div class="p-img">
+                        <img src="https://karagiri.com/cdn/shop/files/Karagiri_Paithani_Saree_Purple_Peacock_Pallu_1.jpg?v=1724673088&width=600"
+                            alt="Traditional Saree">
+                    </div>
+                    <div class="p-details">
+                        <span class="p-cat">Traditional</span>
+                        <h4 class="p-title">Peshwai Nauvari</h4>
+                        <span class="p-price">₹8,500</span>
                     </div>
                 </div>
 
@@ -788,14 +1334,206 @@
         </div>
     </section>
 
+    <!-- Photo Gallery Section -->
+    <section id="gallery" class="section-padding gallery-section">
+        <div class="container">
+            <div class="text-center fade-in">
+                <h2 class="section-title">Our Gallery</h2>
+                <div class="divider-gold"></div>
+                <p style="max-width: 600px; margin: 0 auto 50px; color: var(--text-light);">
+                    Celebrating moments of joy and tradition with our exquisite collection.
+                </p>
+            </div>
+
+            <div class="gallery-grid">
+                <div class="gallery-item fade-in">
+                    <img src="https://karagiri.com/cdn/shop/files/Karagiri_Paithani_Saree_Maroon_Peacock_Pallu_1.jpg?v=1724673088&width=600" alt="Bride in traditional saree">
+                    <div class="gallery-overlay">
+                        <h4>Bridal Collection</h4>
+                    </div>
+                </div>
+                <div class="gallery-item fade-in">
+                    <img src="https://karagiri.com/cdn/shop/files/Karagiri_Paithani_Saree_Blue_Peacock_Pallu_1.jpg?v=1724673088&width=600" alt="Woman in silk saree">
+                    <div class="gallery-overlay">
+                        <h4>Silk Sarees</h4>
+                    </div>
+                </div>
+                <div class="gallery-item fade-in">
+                    <img src="https://karagiri.com/cdn/shop/files/Karagiri_Paithani_Saree_Green_Peacock_Pallu_1.jpg?v=1724673088&width=600" alt="Traditional wear">
+                    <div class="gallery-overlay">
+                        <h4>Traditional Wear</h4>
+                    </div>
+                </div>
+                <div class="gallery-item fade-in">
+                    <img src="https://karagiri.com/cdn/shop/files/Karagiri_Paithani_Saree_Pink_Peacock_Pallu_1.jpg?v=1724673088&width=600" alt="Festive collection">
+                    <div class="gallery-overlay">
+                        <h4>Festive Collection</h4>
+                    </div>
+                </div>
+                <div class="gallery-item fade-in">
+                    <img src="https://karagiri.com/cdn/shop/files/Karagiri_Paithani_Saree_Purple_Peacock_Pallu_1.jpg?v=1724673088&width=600" alt="Baby in traditional dress">
+                    <div class="gallery-overlay">
+                        <h4>Kids Ethnic Wear</h4>
+                    </div>
+                </div>
+                <div class="gallery-item fade-in">
+                    <img src="https://karagiri.com/cdn/shop/files/Karagiri_Paithani_Saree_Yellow_Peacock_Pallu_1.jpg?v=1724673088&width=600" alt="Girls in sarees">
+                    <div class="gallery-overlay">
+                        <h4>Designer Sarees</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="section-padding testimonials-section">
+        <div class="container">
+            <div class="text-center fade-in">
+                <h2 class="section-title">What Our Customers Say</h2>
+                <div class="divider-gold"></div>
+                <p style="max-width: 600px; margin: 0 auto 20px; color: var(--text-light);">
+                    Hear from those who have experienced the beauty and quality of our handwoven treasures.
+                </p>
+            </div>
+
+            <div class="testimonial-grid">
+                <div class="testimonial-card fade-in">
+                    <p class="testimonial-text">
+                        I bought my wedding Paithani from Avani Silks and it was absolutely stunning! The quality 
+                        is unmatched and the staff helped me choose the perfect design. It's now a family heirloom.
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="author-img">P</div>
+                        <div class="author-info">
+                            <h4>Priya Deshmukh</h4>
+                            <p>Pune, Maharashtra</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card fade-in">
+                    <p class="testimonial-text">
+                        The authenticity and craftsmanship are evident in every thread. I've been a loyal customer 
+                        for 15 years and have never been disappointed. True heritage in every piece!
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="author-img">S</div>
+                        <div class="author-info">
+                            <h4>Sunita Kulkarni</h4>
+                            <p>Mumbai, Maharashtra</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card fade-in">
+                    <p class="testimonial-text">
+                        Excellent collection of traditional wear! The staff is knowledgeable and patient. 
+                        They explained the history behind each design. A must-visit for anyone who appreciates fine textiles.
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="author-img">R</div>
+                        <div class="author-info">
+                            <h4>Rajesh Patil</h4>
+                            <p>Nashik, Maharashtra</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="section-padding cta-section">
+        <div class="container">
+            <div class="cta-content fade-in">
+                <h2>Experience the Legacy</h2>
+                <p>Visit our showroom to explore our exclusive collection of handwoven Paithanis, 
+                   silk sarees, and traditional ethnic wear. Our experts are here to guide you.</p>
+                <a href="#visit" class="btn btn-gold">Plan Your Visit</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Us Section -->
+    <section id="contact" class="section-padding contact-section">
+        <div class="container">
+            <div class="text-center fade-in">
+                <h2 class="section-title">Get In Touch</h2>
+                <div class="divider-gold"></div>
+                <p style="max-width: 600px; margin: 0 auto 50px; color: var(--text-light);">
+                    Have questions? We'd love to hear from you. Send us a message and we'll respond as soon as possible.
+                </p>
+            </div>
+
+            <div class="contact-wrapper">
+                <div class="contact-form fade-in">
+                    <form>
+                        <div class="form-group">
+                            <input type="text" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" placeholder="Your Email" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="tel" placeholder="Phone Number" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea rows="5" placeholder="Your Message" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-gold">Send Message</button>
+                    </form>
+                </div>
+
+                <div class="contact-info-box fade-in">
+                    <div class="contact-item">
+                        <i class="fas fa-phone-alt"></i>
+                        <div>
+                            <h4>Call Us</h4>
+                            <p>+91 98765 43210</p>
+                            <p>+91 98765 43211</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h4>Email Us</h4>
+                            <p>info@avanisilks.com</p>
+                            <p>sales@avanisilks.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h4>Visit Us</h4>
+                            <p>124, Laxmi Road</p>
+                            <p>Pune, Maharashtra 411030</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="far fa-clock"></i>
+                        <div>
+                            <h4>Business Hours</h4>
+                            <p>Mon - Sat: 10:00 AM - 9:00 PM</p>
+                            <p>Sunday: Closed</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Visit Us / Location -->
     <section id="visit" class="visit-section">
+        <div class="container text-center fade-in" style="padding: 60px 20px 40px;">
+            <h2 style="color: var(--gold); font-size: 2.5rem; margin-bottom: 10px;">Visit Our Store</h2>
+            <div class="divider-gold"></div>
+            <p style="max-width: 600px; margin: 0 auto; opacity: 0.9;">
+                Experience the texture and colors in person. Our staff will guide you through our heritage collection.
+            </p>
+        </div>
         <div class="visit-grid">
             <div class="visit-info fade-in">
-                <h2>Visit Our Store</h2>
-                <p style="margin-bottom: 30px; opacity: 0.9;">Experience the texture and colors in person. Our staff
-                    will guide you through our heritage collection.</p>
-
                 <div class="info-row">
                     <i class="fas fa-map-marker-alt"></i>
                     <div>
@@ -874,6 +1612,28 @@
         }, { threshold: 0.1 });
 
         document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        // Mobile Menu Toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const menuOverlay = document.getElementById('menuOverlay');
+
+        function toggleMenu() {
+            menuToggle.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+            menuOverlay.classList.toggle('active');
+            document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+        }
+
+        menuToggle.addEventListener('click', toggleMenu);
+        menuOverlay.addEventListener('click', toggleMenu);
+
+        // Close menu when clicking on a link
+        document.querySelectorAll('.mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                toggleMenu();
+            });
+        });
     </script>
 </body>
 
