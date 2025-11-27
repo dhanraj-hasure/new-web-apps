@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Hub | Explore Our Projects</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary: #FF6B6B;
+            --secondary: #4ECDC4;
+            --accent: #FFE66D;
+            --dark: #2D3436;
+            --light: #FAFAFA;
+            --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #FAFAFA;
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #FFFFFF 0%, #F8F9FA 50%, #E8F4F8 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Animated gradient mesh background */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(255, 107, 107, 0.12) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(78, 205, 196, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(255, 230, 109, 0.12) 0%, transparent 50%),
+                radial-gradient(circle at 60% 60%, rgba(147, 197, 253, 0.1) 0%, transparent 50%);
+            animation: meshMove 20s ease-in-out infinite;
+        }
+
+        /* Geometric pattern overlay */
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(30deg, rgba(78, 205, 196, 0.03) 12%, transparent 12.5%, transparent 87%, rgba(78, 205, 196, 0.03) 87.5%, rgba(78, 205, 196, 0.03)),
+                linear-gradient(150deg, rgba(255, 107, 107, 0.03) 12%, transparent 12.5%, transparent 87%, rgba(255, 107, 107, 0.03) 87.5%, rgba(255, 107, 107, 0.03)),
+                linear-gradient(30deg, rgba(255, 230, 109, 0.02) 12%, transparent 12.5%, transparent 87%, rgba(255, 230, 109, 0.02) 87.5%, rgba(255, 230, 109, 0.02)),
+                linear-gradient(150deg, rgba(147, 197, 253, 0.02) 12%, transparent 12.5%, transparent 87%, rgba(147, 197, 253, 0.02) 87.5%, rgba(147, 197, 253, 0.02));
+            background-size: 80px 140px;
+            background-position: 0 0, 0 0, 40px 70px, 40px 70px;
+        }
+
+        @keyframes meshMove {
+            0%, 100% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            33% {
+                transform: translate(30px, -50px) rotate(120deg);
+            }
+            66% {
+                transform: translate(-20px, 20px) rotate(240deg);
+            }
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 10;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 1s ease;
+            background: linear-gradient(135deg, #2D3436 0%, #FF6B6B 50%, #4ECDC4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease 0.2s backwards;
+            color: #5A6C7D;
+            font-weight: 400;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+            background: rgba(255, 255, 255, 0.9);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .scroll-indicator i {
+            font-size: 1.5rem;
+            color: #2D3436;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-10px); }
+        }
+
+        /* Projects Section */
+        .projects {
+            padding: 100px 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            background: linear-gradient(180deg, #FAFAFA 0%, #F5F5F5 100%);
+            position: relative;
+        }
+
+        .projects::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(180deg, rgba(15, 15, 15, 0.05) 0%, transparent 100%);
+            pointer-events: none;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+
+        .section-title p {
+            font-size: 1.1rem;
+            color: #64748b;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, transparent 0%, rgba(255, 255, 255, 0.1) 100%);
+            opacity: 0;
+            transition: opacity 0.4s;
+            pointer-events: none;
+        }
+
+        .project-card:hover {
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+        }
+
+        .project-card:hover::before {
+            opacity: 1;
+        }
+
+        .project-icon {
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-icon::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.1;
+        }
+
+        .food-card .project-icon { background: linear-gradient(135deg, #FF6B6B, #ff8787); }
+        .food-card .project-icon::before { background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y="50" font-size="50">🍽️</text></svg>'); }
+
+        .cloth-card .project-icon { background: linear-gradient(135deg, #4ECDC4, #44A08D); }
+        .photo-card .project-icon { background: linear-gradient(135deg, #f093fb, #f5576c); }
+        .pool-card .project-icon { background: linear-gradient(135deg, #4facfe, #00f2fe); }
+        .mobile-card .project-icon { background: linear-gradient(135deg, #fa709a, #fee140); }
+        .tech-card .project-icon { background: linear-gradient(135deg, #30cfd0, #330867); }
+        .other-card .project-icon { background: linear-gradient(135deg, #a8edea, #fed6e3); }
+
+        .project-content {
+            padding: 30px;
+        }
+
+        .project-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+
+        .project-content p {
+            color: #64748b;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 28px;
+            background: linear-gradient(135deg, #2D3436 0%, #1A1A1A 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .project-link:hover::before {
+            left: 100%;
+        }
+
+        .project-link:hover {
+            transform: translateX(5px);
+            box-shadow: 0 8px 20px rgba(45, 52, 54, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #0F0F0F 0%, #1A1A1A 100%);
+            color: white;
+            padding: 50px 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #FF6B6B, #4ECDC4, transparent);
+        }
+
+        footer p {
+            margin-bottom: 20px;
+            opacity: 0.7;
+            font-size: 0.95rem;
+        }
+
+        .footer-credit {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 25px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            margin-top: 15px;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s;
+        }
+
+        .footer-credit:hover {
+            background: rgba(255,255,255,0.08);
+            transform: translateY(-2px);
+        }
+
+        .footer-credit a {
+            color: #4ECDC4;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .footer-credit a:hover {
+            color: #FF6B6B;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .section-title h2 {
+                font-size: 2rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .projects {
+                padding: 60px 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Creative Digital Experiences</h1>
+            <p>Explore our collection of beautifully crafted web projects</p>
+        </div>
+        <div class="scroll-indicator">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="projects">
+        <div class="section-title">
+            <h2>Our Projects</h2>
+            <p>Click on any project to explore</p>
+        </div>
+
+        <div class="projects-grid">
+            <!-- Food Project -->
+            <div class="project-card food-card">
+                <div class="project-icon">
+                    <i class="fas fa-utensils"></i>
+                </div>
+                <div class="project-content">
+                    <h3>Gavran Eats</h3>
+                    <p>Authentic Maharashtrian food delivery platform with traditional recipes and modern design.</p>
+                    <a href="food.html" class="project-link">
+                        View Project <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Clothing Project -->
+            <div class="project-card cloth-card">
+                <div class="project-icon">
+                    <i class="fas fa-tshirt"></i>
+                </div>
+                <div class="project-content">
+                    <h3>Fashion Store</h3>
+                    <p>Modern clothing and fashion e-commerce platform with trendy collections.</p>
+                    <a href="cloth.html" class="project-link">
+                        View Project <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Photography Project -->
+            <div class="project-card photo-card">
+                <div class="project-icon">
+                    <i class="fas fa-camera"></i>
+                </div>
+                <div class="project-content">
+                    <h3>Photography Portfolio</h3>
+                    <p>Stunning photography showcase with beautiful galleries and portfolios.</p>
+                    <a href="photo.html" class="project-link">
+                        View Project <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Pool/Swimming Project -->
+            <div class="project-card pool-card">
+                <div class="project-icon">
+                    <i class="fas fa-swimming-pool"></i>
+                </div>
+                <div class="project-content">
+                    <h3>Pool Services</h3>
+                    <p>Professional swimming pool maintenance and services platform.</p>
+                    <a href="pool.html" class="project-link">
+                        View Project <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Mobile Project -->
+            <div class="project-card mobile-card">
+                <div class="project-icon">
+                    <i class="fas fa-mobile-alt"></i>
+                </div>
+                <div class="project-content">
+                    <h3>Mobile Store</h3>
+                    <p>Latest smartphones and mobile accessories e-commerce platform.</p>
+                    <a href="mob.html" class="project-link">
+                        View Project <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Lumina Project -->
+            <div class="project-card tech-card">
+                <div class="project-icon">
+                    <i class="fas fa-lightbulb"></i>
+                </div>
+                <div class="project-content">
+                    <h3>Lumina</h3>
+                    <p>Innovative lighting solutions and smart home technology platform.</p>
+                    <a href="lumina.html" class="project-link">
+                        View Project <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- NHU Project -->
+            <div class="project-card other-card">
+                <div class="project-icon">
+                    <i class="fas fa-building"></i>
+                </div>
+                <div class="project-content">
+                    <h3>NHU Platform</h3>
+                    <p>Comprehensive business and services management platform.</p>
+                    <a href="nhu.html" class="project-link">
+                        View Project <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- SQL IO Project -->
+            <div class="project-card tech-card">
+                <div class="project-icon">
+                    <i class="fas fa-database"></i>
+                </div>
+                <div class="project-content">
+                    <h3>SQL IO Dashboard</h3>
+                    <p>Advanced database management and analytics dashboard.</p>
+                    <a href="sqlio.html" class="project-link">
+                        View Project <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 SriOne Technologies. All rights reserved.</p>
+        <div class="footer-credit">
+            <span>Developed by</span>
+            <a href="https://srione-technologies.netlify.app/" target="_blank">
+                SriOne Technologies
+            </a>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll for indicator
+        document.querySelector('.scroll-indicator').addEventListener('click', () => {
+            document.querySelector('.projects').scrollIntoView({ behavior: 'smooth' });
+        });
+
+        // Add animation on scroll
+        const cards = document.querySelectorAll('.project-card');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        cards.forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'all 0.6s ease';
+            observer.observe(card);
+        });
+    </script>
+</body>
+
+</html>
