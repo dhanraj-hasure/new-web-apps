@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elevate | Digital Growth Agency</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- CSS VARIABLES --- */
+        :root {
+            --primary: #4361ee;
+            --primary-dark: #3a0ca3;
+            --accent: #4cc9f0;
+            --text-dark: #1e293b;
+            --text-gray: #64748b;
+            --light-bg: #f8fafc;
+            --white: #ffffff;
+            --gradient: linear-gradient(135deg, var(--primary), var(--accent));
+            --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            --radius: 12px;
+            --transition: all 0.3s ease;
+        }
+
+        /* --- RESET & BASE STYLES --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-dark);
+            background-color: var(--white);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-weight: 800;
+            line-height: 1.2;
+            color: var(--text-dark);
+        }
+
+        p {
+            color: var(--text-gray);
+            font-size: 1.05rem;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* --- UTILITY CLASSES --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-padding {
+            padding: 100px 0;
+        }
+
+        .text-gradient {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 32px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 1rem;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--gradient);
+            color: white;
+            box-shadow: 0 4px 14px rgba(67, 97, 238, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(67, 97, 238, 0.6);
+        }
+
+        .btn-outline {
+            background: white;
+            color: var(--primary);
+            border: 2px solid rgba(67, 97, 238, 0.2);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--primary);
+            background: rgba(67, 97, 238, 0.05);
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 20px 0;
+            transition: var(--transition);
+            background: transparent;
+        }
+
+        nav.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow-sm);
+            padding: 15px 0;
+        }
+
+        .nav-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: var(--gradient);
+            border-radius: 8px;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .nav-link {
+            font-weight: 500;
+            font-size: 0.95rem;
+            color: var(--text-dark);
+            transition: var(--transition);
+        }
+
+        .nav-link:hover {
+            color: var(--primary);
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            padding-top: 140px;
+            padding-bottom: 80px;
+            background: radial-gradient(circle at top right, rgba(76, 201, 240, 0.1), transparent 40%),
+                radial-gradient(circle at bottom left, rgba(67, 97, 238, 0.05), transparent 40%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            margin-bottom: 24px;
+            letter-spacing: -1px;
+        }
+
+        .hero-text p {
+            font-size: 1.25rem;
+            margin-bottom: 32px;
+            max-width: 90%;
+        }
+
+        .hero-image {
+            position: relative;
+        }
+
+        .hero-image img {
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-lg);
+            z-index: 2;
+            position: relative;
+        }
+
+        /* Decorative blobs behind hero image */
+        .blob {
+            position: absolute;
+            z-index: 1;
+            filter: blur(40px);
+            opacity: 0.6;
+        }
+
+        .blob-1 {
+            width: 300px;
+            height: 300px;
+            background: #4cc9f0;
+            top: -50px;
+            right: -50px;
+            border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+            animation: float 8s infinite;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-20px) rotate(10deg);
+            }
+        }
+
+        /* --- STATS SECTION --- */
+        .stats {
+            background: var(--white);
+            padding: 40px 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .stats-flex {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .stat-label {
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* --- SERVICES SECTION --- */
+        .services {
+            background-color: var(--light-bg);
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 60px;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+        }
+
+        .section-header .subtitle {
+            color: var(--primary);
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: var(--white);
+            padding: 40px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            border: 1px solid #f1f5f9;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+            border-color: transparent;
+        }
+
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(67, 97, 238, 0.1);
+            color: var(--primary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 24px;
+        }
+
+        .card h3 {
+            margin-bottom: 16px;
+            font-size: 1.3rem;
+        }
+
+        /* --- ABOUT / SPLIT SECTION --- */
+        .split-section {
+            background: var(--white);
+        }
+
+        .split-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .split-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 24px;
+        }
+
+        .split-content ul {
+            list-style: none;
+            margin: 30px 0;
+        }
+
+        .split-content li {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            font-weight: 500;
+        }
+
+        .split-content li i {
+            color: var(--primary);
+            margin-right: 15px;
+            background: rgba(67, 97, 238, 0.1);
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+        }
+
+        .split-image img {
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* --- CONTACT CTA --- */
+        .cta-section {
+            background: var(--gradient);
+            color: white;
+            text-align: center;
+            border-radius: 20px;
+            margin: 0 2rem;
+            padding: 80px 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .cta-section h2 {
+            color: white;
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+        }
+
+        .cta-section p {
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 30px;
+        }
+
+        .btn-white {
+            background: white;
+            color: var(--primary);
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-white:hover {
+            transform: translateY(-2px);
+            background: #f8f9fa;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background: var(--white);
+            padding: 60px 0 20px;
+            border-top: 1px solid #e2e8f0;
+            margin-top: 60px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-brand p {
+            margin-top: 16px;
+            font-size: 0.9rem;
+        }
+
+        .footer-col h4 {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        .footer-links li {
+            list-style: none;
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: var(--text-gray);
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        .copyright {
+            text-align: center;
+            border-top: 1px solid #f1f5f9;
+            padding-top: 20px;
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 968px) {
+
+            .hero-grid,
+            .split-wrapper {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .hero-text {
+                text-align: center;
+                order: 2;
+            }
+
+            .hero-text p {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .hero-image {
+                order: 1;
+            }
+
+            .nav-menu {
+                display: none;
+                /* Simplification for single file */
+            }
+
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        /* Animation classes */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .fade-in-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="container nav-wrapper">
+            <a href="#" class="logo">
+                <div class="logo-icon"><i class="fas fa-rocket"></i></div>
+                Elevate.
+            </a>
+            <div class="nav-menu">
+                <a href="#services" class="nav-link">Services</a>
+                <a href="#about" class="nav-link">About Us</a>
+                <a href="#projects" class="nav-link">Projects</a>
+                <a href="#contact" class="btn btn-primary" style="padding: 10px 24px;">Get Started</a>
+            </div>
+            <!-- Mobile Toggle Placeholder (visible on small screens via JS if expanded) -->
+            <div style="display: none;"><i class="fas fa-bars"></i></div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container hero-grid">
+            <div class="hero-text fade-in-up">
+                <h1>Scale Your Business with <span class="text-gradient">Digital Excellence</span></h1>
+                <p>We craft award-winning websites, marketing strategies, and digital experiences that turn visitors
+                    into loyal customers.</p>
+                <div style="display: flex; gap: 15px; flex-wrap: wrap; justify-content: center;">
+                    <a href="#contact" class="btn btn-primary">Start a Project</a>
+                    <a href="#services" class="btn btn-outline">View Our Work</a>
+                </div>
+            </div>
+            <div class="hero-image fade-in-up">
+                <div class="blob blob-1"></div>
+                <!-- Using a high quality office/tech image -->
+                <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                    alt="Team working on digital strategy">
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="container stats-flex">
+            <div class="stat-item fade-in-up">
+                <div class="stat-number">250+</div>
+                <div class="stat-label">Projects Launched</div>
+            </div>
+            <div class="stat-item fade-in-up">
+                <div class="stat-number">98%</div>
+                <div class="stat-label">Client Satisfaction</div>
+            </div>
+            <div class="stat-item fade-in-up">
+                <div class="stat-number">10+</div>
+                <div class="stat-label">Years Experience</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="section-padding services">
+        <div class="container">
+            <div class="section-header fade-in-up">
+                <span class="subtitle">Our Expertise</span>
+                <h2>We Provide <span class="text-gradient">Solutions</span></h2>
+                <p>From code to content, our team handles every aspect of your digital presence.</p>
+            </div>
+            <div class="cards-grid">
+                <!-- Service 1 -->
+                <div class="card fade-in-up">
+                    <div class="card-icon"><i class="fas fa-laptop-code"></i></div>
+                    <h3>Web Development</h3>
+                    <p>Blazing fast, responsive websites built with modern technologies like React and Tailwind to
+                        ensure scalability.</p>
+                </div>
+                <!-- Service 2 -->
+                <div class="card fade-in-up">
+                    <div class="card-icon"><i class="fas fa-bullhorn"></i></div>
+                    <h3>Digital Marketing</h3>
+                    <p>Data-driven SEO, PPC, and social media campaigns that drive real traffic and measurable ROI.</p>
+                </div>
+                <!-- Service 3 -->
+                <div class="card fade-in-up">
+                    <div class="card-icon"><i class="fas fa-pen-nib"></i></div>
+                    <h3>UI/UX Design</h3>
+                    <p>Beautiful, intuitive interfaces designed with the user journey in mind to maximize conversion
+                        rates.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section-padding split-section">
+        <div class="container split-wrapper">
+            <div class="split-image fade-in-up">
+                <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                    alt="Strategy meeting">
+            </div>
+            <div class="split-content fade-in-up">
+                <span class="subtitle"
+                    style="color: var(--primary); font-weight: 700; text-transform: uppercase; letter-spacing: 2px;">Why
+                    Choose Us</span>
+                <h2>We Help You <span class="text-gradient">Outperform</span> the Competition</h2>
+                <p>In a crowded digital landscape, standing out is hard. We use a proven methodology to identify your
+                    unique value and amplify it.</p>
+                <ul>
+                    <li><i class="fas fa-check"></i> Customized Strategy for every client</li>
+                    <li><i class="fas fa-check"></i> 24/7 Support and Maintenance</li>
+                    <li><i class="fas fa-check"></i> Agile Development Process</li>
+                </ul>
+                <a href="#" class="btn btn-outline">Learn More About Us</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA / Contact Section -->
+    <div id="contact" class="container" style="margin-bottom: 80px;">
+        <div class="cta-section fade-in-up">
+            <div class="cta-content">
+                <h2>Ready to Grow Your Business?</h2>
+                <p>Let's discuss your project and see how we can help you achieve your goals.</p>
+                <a href="mailto:hello@elevate.com" class="btn btn-white">Contact Us Today</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="#" class="logo">
+                        <div class="logo-icon"><i class="fas fa-rocket"></i></div>
+                        Elevate.
+                    </a>
+                    <p>Helping businesses thrive in the digital age through innovation and creativity.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Services</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Web Design</a></li>
+                        <li><a href="#">Marketing</a></li>
+                        <li><a href="#">Consulting</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Social</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Twitter</a></li>
+                        <li><a href="#">LinkedIn</a></li>
+                        <li><a href="#">Instagram</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2025 Elevate Digital Agency. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Sticky Navbar Logic
+        const navbar = document.getElementById('navbar');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Simple Intersection Observer for Fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target); // Only animate once
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in-up').forEach(element => {
+            observer.observe(element);
+        });
+
+        // Smooth Scroll for Anchor Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

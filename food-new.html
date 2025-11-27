@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lens & Soul | Creative Indian Photography</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Quicksand:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- CSS VARIABLES --- */
+        :root {
+            --primary: #E07A5F;
+            /* Terracotta / Warm Orange */
+            --secondary: #81B29A;
+            /* Sage Green */
+            --yellow: #F2CC8F;
+            /* Muted Yellow */
+            --dark: #3D405B;
+            /* Deep Navy/Grey */
+            --bg-cream: #F4F1DE;
+            /* Vintage Cream */
+            --white: #ffffff;
+            --shadow: 0 10px 30px rgba(61, 64, 91, 0.1);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --radius-blob: 60% 40% 30% 70% / 60% 30% 70% 40%;
+        }
+
+        /* --- RESET --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            /* Round, friendly font */
+            background-color: var(--bg-cream);
+            color: var(--dark);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-family: 'DM Serif Display', serif;
+            font-weight: 400;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+
+        /* --- UTILITIES --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-padding {
+            padding: 100px 0;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 30px;
+            border-radius: 50px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-5px) rotate(-2deg);
+            box-shadow: 0 10px 25px rgba(224, 122, 95, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--dark);
+            color: var(--dark);
+        }
+
+        .btn-outline:hover {
+            background: var(--dark);
+            color: white;
+            transform: translateY(-5px);
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            position: fixed;
+            top: 20px;
+            left: 0;
+            right: 0;
+            margin: 0 auto;
+            width: 90%;
+            max-width: 1200px;
+            padding: 15px 30px;
+            z-index: 999;
+            transition: var(--transition);
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border-radius: 50px;
+            box-shadow: var(--shadow);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-family: 'DM Serif Display', serif;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo-icon {
+            width: 35px;
+            height: 35px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            font-weight: 600;
+            font-size: 0.95rem;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: var(--secondary);
+            border-radius: 2px;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            padding-top: 100px;
+            overflow: hidden;
+        }
+
+        .hero-blob {
+            position: absolute;
+            top: -10%;
+            right: -10%;
+            width: 600px;
+            height: 600px;
+            background-color: var(--secondary);
+            opacity: 0.15;
+            border-radius: var(--radius-blob);
+            animation: morph 15s ease-in-out infinite;
+            z-index: -1;
+        }
+
+        .hero-blob-2 {
+            position: absolute;
+            bottom: -10%;
+            left: -10%;
+            width: 400px;
+            height: 400px;
+            background-color: var(--primary);
+            opacity: 0.1;
+            border-radius: var(--radius-blob);
+            animation: morph 12s ease-in-out infinite reverse;
+            z-index: -1;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .hero-text h1 {
+            font-size: 4.5rem;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+
+        .highlight {
+            position: relative;
+            z-index: 1;
+            display: inline-block;
+        }
+
+        .highlight::after {
+            content: '';
+            position: absolute;
+            bottom: 5px;
+            left: 0;
+            width: 100%;
+            height: 15px;
+            background: var(--yellow);
+            z-index: -1;
+            transform: rotate(-2deg);
+            opacity: 0.6;
+            border-radius: 10px;
+        }
+
+        .hero-text p {
+            font-size: 1.2rem;
+            color: #555;
+            margin-bottom: 35px;
+            max-width: 90%;
+        }
+
+        /* Organic Image Frame */
+        .hero-image-wrapper {
+            position: relative;
+        }
+
+        .hero-img {
+            border-radius: 200px 200px 20px 20px;
+            /* Arch Shape */
+            border: 8px solid white;
+            box-shadow: var(--shadow);
+            transform: rotate(3deg);
+            transition: var(--transition);
+        }
+
+        .hero-image-wrapper:hover .hero-img {
+            transform: rotate(0deg);
+        }
+
+        .floating-badge {
+            position: absolute;
+            top: 40px;
+            right: -20px;
+            background: white;
+            padding: 15px 25px;
+            border-radius: 50px;
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            animation: float 4s ease-in-out infinite;
+            z-index: 2;
+        }
+
+        .badge-icon {
+            background: var(--yellow);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--dark);
+        }
+
+        @keyframes morph {
+            0% {
+                border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            }
+
+            50% {
+                border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+            }
+
+            100% {
+                border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            }
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+
+        /* --- CATEGORIES (Pills) --- */
+        .categories {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .cat-title {
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+        }
+
+        .cat-grid {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .cat-card {
+            background: white;
+            padding: 10px;
+            border-radius: 100px;
+            /* Pill Shape */
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding-right: 30px;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 2px solid transparent;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .cat-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--secondary);
+        }
+
+        .cat-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+
+        .cat-card h4 {
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 700;
+        }
+
+        /* --- PORTFOLIO (Organic Grid) --- */
+        .portfolio-section {
+            background: white;
+            border-radius: 50px;
+            margin: 0 20px;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .portfolio-item {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            height: 400px;
+            box-shadow: var(--shadow);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .portfolio-item:nth-child(even) {
+            transform: translateY(40px);
+            /* Staggered look */
+        }
+
+        .portfolio-item:hover {
+            transform: scale(1.03) translateY(var(--translate, 0));
+        }
+
+        .portfolio-item:nth-child(even):hover {
+            --translate: 40px;
+        }
+
+        .portfolio-item img {
+            width: 100%;
+            height: 100%;
+            transition: transform 0.5s;
+        }
+
+        .p-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+            color: white;
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .portfolio-item:hover .p-overlay {
+            opacity: 1;
+        }
+
+        .tag {
+            background: var(--yellow);
+            color: var(--dark);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            display: inline-block;
+            margin-bottom: 5px;
+        }
+
+        /* --- SERVICES CARDS --- */
+        .services-wrapper {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background: white;
+            padding: 40px;
+            border-radius: 30px;
+            text-align: center;
+            transition: var(--transition);
+            border-bottom: 5px solid var(--secondary);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            background: var(--secondary);
+            color: white;
+        }
+
+        .service-card:hover .s-icon {
+            background: white;
+            color: var(--secondary);
+        }
+
+        .service-card:hover p {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .s-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--bg-cream);
+            border-radius: 50%;
+            /* Circle */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            font-size: 2rem;
+            color: var(--dark);
+            transition: var(--transition);
+        }
+
+        /* --- TESTIMONIALS --- */
+        .testimonial-box {
+            background: var(--primary);
+            color: white;
+            padding: 60px;
+            border-radius: 40px;
+            position: relative;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .testimonial-img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 5px solid var(--bg-cream);
+            position: absolute;
+            top: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* --- CONTACT --- */
+        .contact-blob {
+            background: var(--white);
+            border-radius: 50px;
+            padding: 60px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .contact-deco {
+            position: absolute;
+            top: -50px;
+            left: -50px;
+            width: 150px;
+            height: 150px;
+            background: var(--yellow);
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 15px 20px;
+            border-radius: 15px;
+            border: 2px solid #eee;
+            background: #fcfcfc;
+            font-family: inherit;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .form-input:focus {
+            border-color: var(--secondary);
+            background: white;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 60px 0 30px;
+            border-top-left-radius: 50px;
+            border-top-right-radius: 50px;
+            margin-top: 50px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 40px;
+            text-align: center;
+        }
+
+        .socials a {
+            display: inline-flex;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            align-items: center;
+            justify-content: center;
+            margin: 0 5px;
+            transition: var(--transition);
+        }
+
+        .socials a:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 900px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-img {
+                width: 80%;
+                margin: 40px auto 0;
+            }
+
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .portfolio-item:nth-child(even) {
+                transform: none;
+            }
+
+            .portfolio-item:nth-child(even):hover {
+                --translate: 0;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+
+        /* Animation */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: 0.8s ease-out;
+        }
+
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <a href="#" class="logo">
+            <div class="logo-icon"><i class="fas fa-camera-retro"></i></div>
+            Lens & Soul
+        </a>
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#work">Portfolio</a>
+            <a href="#services">Packages</a>
+            <a href="#about">About</a>
+            <a href="#contact" class="btn btn-primary" style="padding: 10px 25px; box-shadow: none;">Book Date</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-blob"></div>
+        <div class="hero-blob-2"></div>
+
+        <div class="container hero-grid">
+            <div class="hero-text fade-up">
+                <div class="tag" style="background: white; border: 1px solid var(--dark); margin-bottom: 20px;">
+                    <i class="fas fa-map-marker-alt" style="color:var(--primary)"></i> Available in India
+                </div>
+                <h1>Capturing Real <br> <span class="highlight">Love Stories.</span></h1>
+                <p>We don't just take photos; we freeze feelings. Candid, colorful, and creative photography for couples
+                    who want something unique.</p>
+                <div style="display: flex; gap: 15px; flex-wrap: wrap; justify-content: center;">
+                    <a href="#contact" class="btn btn-primary">Check Availability <i class="fas fa-arrow-right"></i></a>
+                    <a href="#work" class="btn btn-outline">See Gallery</a>
+                </div>
+
+                <div style="margin-top: 40px; display: flex; align-items: center; gap: 15px;">
+                    <div style="display: flex;">
+                        <img src="https://randomuser.me/api/portraits/women/68.jpg"
+                            style="width:40px; height:40px; border-radius:50%; border:2px solid white;" alt="">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg"
+                            style="width:40px; height:40px; border-radius:50%; border:2px solid white; margin-left:-15px;"
+                            alt="">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg"
+                            style="width:40px; height:40px; border-radius:50%; border:2px solid white; margin-left:-15px;"
+                            alt="">
+                    </div>
+                    <span style="font-weight: 700; font-size: 0.9rem;">Loved by 500+ Couples</span>
+                </div>
+            </div>
+
+            <div class="hero-image-wrapper fade-up">
+                <!-- Arch shaped image -->
+                <img src="https://images.unsplash.com/photo-1623838271032-15d2f6385d56?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                    alt="Indian Couple" class="hero-img">
+
+                <!-- Floating Element -->
+                <div class="floating-badge">
+                    <div class="badge-icon"><i class="fas fa-heart"></i></div>
+                    <div>
+                        <h5 style="font-weight:700; margin-bottom:0; line-height:1;">Candid</h5>
+                        <small>Moments</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories (Pills) -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="categories fade-up">
+                <h2 class="cat-title">What We <span style="color:var(--primary)">Capture</span></h2>
+                <div class="cat-grid">
+                    <div class="cat-card">
+                        <div class="cat-img"><img
+                                src="https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80"
+                                alt=""></div>
+                        <h4>Weddings</h4>
+                    </div>
+                    <div class="cat-card">
+                        <div class="cat-img"><img
+                                src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80"
+                                alt=""></div>
+                        <h4>Haldi & Fun</h4>
+                    </div>
+                    <div class="cat-card">
+                        <div class="cat-img"><img
+                                src="https://images.unsplash.com/photo-1629235041075-814d444747c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80"
+                                alt=""></div>
+                        <h4>Couples</h4>
+                    </div>
+                    <div class="cat-card">
+                        <div class="cat-img"><img
+                                src="https://images.unsplash.com/photo-1519340241574-2291ecbc106f?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80"
+                                alt=""></div>
+                        <h4>Portraits</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="work" class="section-padding portfolio-section">
+        <div class="container">
+            <div style="text-align: center; margin-bottom: 20px;" class="fade-up">
+                <span class="tag">Portfolio</span>
+                <h2 style="font-size: 2.5rem; margin-top: 10px;">Stories We Told</h2>
+            </div>
+
+            <div class="portfolio-grid">
+                <!-- Item 1 -->
+                <div class="portfolio-item fade-up">
+                    <img src="https://images.unsplash.com/photo-1605218427360-1516e872d80d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                        alt="Mehndi">
+                    <div class="p-overlay">
+                        <span class="tag">Mehndi</span>
+                        <h3>Colors of Jaipur</h3>
+                    </div>
+                </div>
+                <!-- Item 2 -->
+                <div class="portfolio-item fade-up">
+                    <img src="https://images.unsplash.com/photo-1608226991197-873f443b749d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                        alt="Wedding">
+                    <div class="p-overlay">
+                        <span class="tag">Wedding</span>
+                        <h3>Royal Vows</h3>
+                    </div>
+                </div>
+                <!-- Item 3 -->
+                <div class="portfolio-item fade-up">
+                    <img src="https://images.unsplash.com/photo-1628156172605-64506c19f562?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                        alt="Couple">
+                    <div class="p-overlay">
+                        <span class="tag">Pre-Wedding</span>
+                        <h3>Sunset in Goa</h3>
+                    </div>
+                </div>
+                <!-- Item 4 -->
+                <div class="portfolio-item fade-up">
+                    <img src="https://images.unsplash.com/photo-1549417229-aa67d3263c09?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                        alt="Portrait">
+                    <div class="p-overlay">
+                        <span class="tag">Portrait</span>
+                        <h3>Bridal Glow</h3>
+                    </div>
+                </div>
+                <!-- Item 5 -->
+                <div class="portfolio-item fade-up">
+                    <img src="https://images.unsplash.com/photo-1616782298283-a4c3f59e6631?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                        alt="Haldi">
+                    <div class="p-overlay">
+                        <span class="tag">Fun</span>
+                        <h3>Haldi Splash</h3>
+                    </div>
+                </div>
+                <!-- Item 6 -->
+                <div class="portfolio-item fade-up">
+                    <img src="https://images.unsplash.com/photo-1596711903657-3f3366dd6624?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                        alt="Decor">
+                    <div class="p-overlay">
+                        <span class="tag">Details</span>
+                        <h3>Floral Setup</h3>
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 80px;">
+                <a href="#" class="btn btn-outline">View More on Instagram</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services / Features -->
+    <section id="services" class="section-padding">
+        <div class="container">
+            <div class="services-wrapper">
+                <div class="service-card fade-up">
+                    <div class="s-icon"><i class="fas fa-camera"></i></div>
+                    <h3>Candid Style</h3>
+                    <p>We blend into the crowd to capture raw emotions and unscripted laughter. No awkward poses.</p>
+                </div>
+                <div class="service-card fade-up">
+                    <div class="s-icon"><i class="fas fa-film"></i></div>
+                    <h3>Cinematic Films</h3>
+                    <p>4K wedding teasers and full-length films that look like a Bollywood movie of your life.</p>
+                </div>
+                <div class="service-card fade-up">
+                    <div class="s-icon"><i class="fas fa-plane"></i></div>
+                    <h3>Destination</h3>
+                    <p>We love to travel! Whether it's Udaipur, Kerala, or Bali, we are ready to fly with you.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonial -->
+    <section class="section-padding" style="background: var(--bg-cream);">
+        <div class="container">
+            <div class="testimonial-box fade-up">
+                <img src="https://randomuser.me/api/portraits/women/90.jpg" alt="Client" class="testimonial-img">
+                <i class="fas fa-quote-left" style="font-size: 2rem; opacity: 0.5; margin-bottom: 20px;"></i>
+                <h3 style="font-size: 1.5rem; line-height: 1.6; margin-bottom: 20px;">"The photos are beyond beautiful!
+                    They captured the madness of our big Indian family perfectly. It feels like reliving the day every
+                    time we look at them."</h3>
+                <h5 style="text-transform: uppercase; letter-spacing: 2px;">Sneha & Rohan</h5>
+                <span style="opacity: 0.8; font-size: 0.9rem;">Wedding in Bangalore</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="section-padding">
+        <div class="container">
+            <div class="contact-blob fade-up">
+                <div class="contact-deco"></div>
+                <div style="position: relative; z-index: 1; text-align: center; margin-bottom: 40px;">
+                    <h2 style="font-size: 3rem;">Let's Chat!</h2>
+                    <p>Tell us your dates and let's make magic happen.</p>
+                </div>
+
+                <form onsubmit="event.preventDefault(); alert('Sent!');"
+                    style="max-width: 700px; margin: 0 auto; position: relative; z-index: 2;">
+                    <div class="form-grid">
+                        <input type="text" class="form-input" placeholder="Name">
+                        <input type="text" class="form-input" placeholder="Phone Number">
+                        <input type="text" class="form-input" placeholder="Event Date">
+                        <select class="form-input">
+                            <option>Wedding</option>
+                            <option>Pre-Wedding</option>
+                            <option>Maternity</option>
+                        </select>
+                    </div>
+                    <textarea class="form-input" rows="4" placeholder="Tell us about your story..."
+                        style="margin-top: 20px;"></textarea>
+                    <button class="btn btn-primary" style="width: 100%; margin-top: 20px; font-size: 1.2rem;">Send
+                        Inquiry</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div style="text-align: left;">
+                    <a href="#" class="logo" style="color: white; margin-bottom: 15px;">
+                        <div class="logo-icon" style="background: white; color: var(--dark);"><i
+                                class="fas fa-camera-retro"></i></div>
+                        Lens & Soul
+                    </a>
+                    <p style="opacity: 0.7; font-size: 0.9rem;">Making memories tangible since 2018.</p>
+                </div>
+
+                <div>
+                    <h4 style="margin-bottom: 15px;">Follow Us</h4>
+                    <div class="socials">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-pinterest"></i></a>
+                    </div>
+                </div>
+
+                <div style="text-align: right;">
+                    <h4 style="margin-bottom: 15px;">Contact</h4>
+                    <p style="opacity: 0.7; font-size: 0.9rem;">+91 98765 43210</p>
+                    <p style="opacity: 0.7; font-size: 0.9rem;">hello@lensandsoul.in</p>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 40px; opacity: 0.5; font-size: 0.8rem;">
+                &copy; 2025 Lens & Soul Photography. Made with love in India.
+            </div>
+        </div>
+    </footer>
+
+    <!-- JS -->
+    <script>
+        // Scroll Animation
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+    </script>
+</body>
+
+</html>

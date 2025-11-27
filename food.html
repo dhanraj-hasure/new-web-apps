@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FreshBite | Organic & Healthy</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- CSS VARIABLES --- */
+        :root {
+            --primary: #FF6B6B;
+            /* Coral Red */
+            --secondary: #4ECDC4;
+            /* Teal Green */
+            --yellow: #FFE66D;
+            /* Soft Yellow */
+            --dark: #292F36;
+            --bg-cream: #FFF9F5;
+            /* Warm off-white */
+            --white: #ffffff;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        /* --- RESET --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-cream);
+            color: var(--dark);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-family: 'DM Serif Display', serif;
+            /* Elegant serif for headings */
+            font-weight: 400;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* --- UTILITIES --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-padding {
+            padding: 100px 0;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 35px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #ee5253;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 107, 107, 0.4);
+        }
+
+        .btn-icon {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 25px 0;
+            z-index: 999;
+            transition: var(--transition);
+        }
+
+        nav.scrolled {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 15px 0;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .nav-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-family: 'DM Serif Display', serif;
+            color: var(--dark);
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .cart-icon {
+            position: relative;
+            font-size: 1.2rem;
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--primary);
+            color: white;
+            font-size: 0.7rem;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            padding-top: 80px;
+        }
+
+        /* Organic Background Shape */
+        .hero-bg-shape {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50%;
+            height: 100%;
+            background-color: var(--secondary);
+            opacity: 0.1;
+            border-bottom-left-radius: 300px;
+            z-index: -1;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .hero-text h1 {
+            font-size: 4rem;
+            line-height: 1.1;
+            margin-bottom: 25px;
+            color: var(--dark);
+        }
+
+        .hero-text p {
+            font-size: 1.1rem;
+            color: #555;
+            margin-bottom: 35px;
+            max-width: 90%;
+        }
+
+        .hero-image {
+            position: relative;
+        }
+
+        /* Blob Mask for Image */
+        .hero-image img {
+            border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+            box-shadow: var(--shadow);
+            animation: morph 8s ease-in-out infinite;
+            border: 5px solid white;
+        }
+
+        @keyframes morph {
+            0% {
+                border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+            }
+
+            50% {
+                border-radius: 60% 40% 30% 70% / 50% 60% 40% 60%;
+            }
+
+            100% {
+                border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+            }
+        }
+
+        .floating-card {
+            position: absolute;
+            bottom: 40px;
+            left: -20px;
+            background: white;
+            padding: 15px 25px;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        /* --- CATEGORY SECTION --- */
+        .categories {
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            margin-bottom: 60px;
+        }
+
+        .section-title span {
+            color: var(--primary);
+            position: relative;
+        }
+
+        /* Underline effect */
+        .section-title span::after {
+            content: '';
+            position: absolute;
+            bottom: 5px;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background: var(--yellow);
+            z-index: -1;
+            opacity: 0.6;
+            border-radius: 5px;
+        }
+
+        .category-grid {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .cat-card {
+            background: white;
+            padding: 30px;
+            border-radius: 100px;
+            /* Pill shape */
+            width: 180px;
+            height: 240px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+            border: 1px solid transparent;
+            cursor: pointer;
+        }
+
+        .cat-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--secondary);
+        }
+
+        .cat-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: var(--bg-cream);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            font-size: 2rem;
+        }
+
+        .cat-card h4 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+        }
+
+        /* --- POPULAR DISHES --- */
+        .dishes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .dish-card {
+            background: white;
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .dish-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .dish-img {
+            height: 250px;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .dish-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .dish-card:hover .dish-img img {
+            transform: scale(1.1);
+        }
+
+        .dish-content {
+            padding: 25px;
+        }
+
+        .dish-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+
+        .price {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+
+        .rating {
+            color: #FFC107;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .add-btn {
+            width: 100%;
+            padding: 12px;
+            background: var(--dark);
+            color: white;
+            border: none;
+            border-radius: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .add-btn:hover {
+            background: var(--secondary);
+        }
+
+        /* --- APP SECTION --- */
+        .app-section {
+            background-color: var(--secondary);
+            border-radius: 40px;
+            padding: 60px;
+            margin: 50px 0;
+            position: relative;
+            overflow: hidden;
+            color: white;
+        }
+
+        .app-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 40px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .app-text h2 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .app-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .store-btn {
+            background: var(--dark);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.8rem;
+        }
+
+        .store-btn i {
+            font-size: 1.5rem;
+        }
+
+        /* Pattern overlay */
+        .pattern-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(rgba(255, 255, 255, 0.2) 2px, transparent 2px);
+            background-size: 30px 30px;
+            z-index: 1;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 80px 0 30px;
+            border-top-left-radius: 50px;
+            border-top-right-radius: 50px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1.5fr;
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .footer-logo {
+            font-family: 'DM Serif Display', serif;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .footer h5 {
+            font-size: 1.2rem;
+            margin-bottom: 25px;
+            font-weight: 500;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            opacity: 0.7;
+            transition: 0.3s;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+            color: var(--secondary);
+        }
+
+        .newsletter input {
+            width: 100%;
+            padding: 15px;
+            border-radius: 10px;
+            border: none;
+            margin-bottom: 10px;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            opacity: 0.6;
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-text h1 {
+                font-size: 2.8rem;
+            }
+
+            .hero-bg-shape {
+                width: 100%;
+                height: 50%;
+                bottom: 0;
+                top: auto;
+                border-radius: 300px 300px 0 0;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .app-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .floating-card {
+                display: none;
+            }
+        }
+
+        /* Entrance Animations */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: 0.8s ease-out;
+        }
+
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="container nav-inner">
+            <a href="#" class="logo">Fresh<span>Bite.</span></a>
+            <div class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#menu">Menu</a>
+                <a href="#about">About</a>
+                <a href="#app">Mobile App</a>
+            </div>
+            <div class="nav-actions" style="display: flex; gap: 20px; align-items: center;">
+                <a href="#" class="cart-icon">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span class="cart-badge">2</span>
+                </a>
+                <a href="#" class="btn btn-primary" style="padding: 10px 25px;">Order Now</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-bg-shape"></div>
+        <div class="container hero-grid">
+            <div class="hero-text fade-up">
+                <h4><i class="fas fa-leaf" style="color:var(--secondary)"></i> 100% Organic & Fresh</h4>
+                <h1>Good Food for <br> Good Moments.</h1>
+                <p>Experience the taste of nature with our farm-to-table delivery service. Healthy meals prepared by top
+                    chefs, delivered to your door.</p>
+                <a href="#menu" class="btn btn-primary btn-icon">
+                    View Menu <i class="fas fa-arrow-right"></i>
+                </a>
+                <div style="margin-top: 30px; display: flex; align-items: center; gap: 15px;">
+                    <div style="display: flex;">
+                        <!-- Avatars -->
+                        <div
+                            style="width:40px; height:40px; border-radius:50%; background:#ddd; border:2px solid white; overflow:hidden;">
+                            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt=""></div>
+                        <div
+                            style="width:40px; height:40px; border-radius:50%; background:#ddd; border:2px solid white; overflow:hidden; margin-left:-10px;">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt=""></div>
+                        <div
+                            style="width:40px; height:40px; border-radius:50%; background:#ddd; border:2px solid white; overflow:hidden; margin-left:-10px;">
+                            <img src="https://randomuser.me/api/portraits/women/68.jpg" alt=""></div>
+                    </div>
+                    <span style="font-weight: 600; font-size: 0.9rem;">12k+ Happy Eaters</span>
+                </div>
+            </div>
+
+            <div class="hero-image fade-up">
+                <!-- Blob shape image -->
+                <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                    alt="Healthy Salad Bowl">
+
+                <!-- Floating Element -->
+                <div class="floating-card">
+                    <div style="background:var(--bg-cream); padding:10px; border-radius:50%; color:var(--primary);">
+                        <i class="fas fa-shipping-fast"></i>
+                    </div>
+                    <div>
+                        <h5 style="font-weight:700; margin-bottom:2px;">Free Delivery</h5>
+                        <span style="font-size:0.8rem; color:#888;">On orders over $30</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories -->
+    <section class="section-padding categories">
+        <div class="container">
+            <div class="section-title fade-up">
+                <h2>Browse by <span>Category</span></h2>
+            </div>
+            <div class="category-grid">
+                <div class="cat-card fade-up">
+                    <div class="cat-icon" style="color: #FF9F1C;">
+                        <i class="fas fa-hamburger"></i>
+                    </div>
+                    <h4>Breakfast</h4>
+                </div>
+                <div class="cat-card fade-up">
+                    <div class="cat-icon" style="color: #2EC4B6;">
+                        <i class="fas fa-carrot"></i>
+                    </div>
+                    <h4>Vegan</h4>
+                </div>
+                <div class="cat-card fade-up">
+                    <div class="cat-icon" style="color: #E71D36;">
+                        <i class="fas fa-drumstick-bite"></i>
+                    </div>
+                    <h4>Meat</h4>
+                </div>
+                <div class="cat-card fade-up">
+                    <div class="cat-icon" style="color: #A0C4FF;">
+                        <i class="fas fa-fish"></i>
+                    </div>
+                    <h4>Seafood</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu" class="section-padding" style="background-color: white;">
+        <div class="container">
+            <div class="section-title fade-up">
+                <h2>Popular <span>Dishes</span></h2>
+            </div>
+
+            <div class="dishes-grid">
+                <!-- Dish 1 -->
+                <div class="dish-card fade-up">
+                    <div class="dish-img">
+                        <img src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                            alt="Salad">
+                    </div>
+                    <div class="dish-content">
+                        <div class="dish-header">
+                            <h3>Summer Salad</h3>
+                            <span class="price">$12.99</span>
+                        </div>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span style="color:#999; margin-left:5px;">(45)</span>
+                        </div>
+                        <p style="font-size:0.9rem; color:#666; margin-bottom:20px;">Fresh arugula, feta cheese,
+                            pomegranate, and walnut dressing.</p>
+                        <button class="add-btn">Add to Cart</button>
+                    </div>
+                </div>
+
+                <!-- Dish 2 -->
+                <div class="dish-card fade-up">
+                    <div class="dish-img">
+                        <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                            alt="Pizza">
+                    </div>
+                    <div class="dish-content">
+                        <div class="dish-header">
+                            <h3>Veggie Supreme</h3>
+                            <span class="price">$16.50</span>
+                        </div>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span style="color:#999; margin-left:5px;">(120)</span>
+                        </div>
+                        <p style="font-size:0.9rem; color:#666; margin-bottom:20px;">Wood-fired base topped with bell
+                            peppers, olives, and mushrooms.</p>
+                        <button class="add-btn">Add to Cart</button>
+                    </div>
+                </div>
+
+                <!-- Dish 3 -->
+                <div class="dish-card fade-up">
+                    <div class="dish-img">
+                        <img src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                            alt="Pancakes">
+                    </div>
+                    <div class="dish-content">
+                        <div class="dish-header">
+                            <h3>Berry Pancakes</h3>
+                            <span class="price">$10.00</span>
+                        </div>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <span style="color:#999; margin-left:5px;">(32)</span>
+                        </div>
+                        <p style="font-size:0.9rem; color:#666; margin-bottom:20px;">Fluffy pancakes served with maple
+                            syrup and fresh berries.</p>
+                        <button class="add-btn">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section-padding">
+        <div class="container">
+            <div class="hero-grid" style="align-items: center;">
+                <div class="hero-image fade-up">
+                    <img src="https://images.unsplash.com/photo-1556910103-1c02745a30bf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Chefs Cooking" style="border-radius: 30px; box-shadow: var(--shadow);">
+                    <!-- Decorative Badge -->
+                    <div style="position: absolute; top: 30px; right: -20px; background: var(--yellow); width: 100px; height: 100px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-align: center; font-weight: 700; font-family: 'DM Serif Display', serif; transform: rotate(15deg); box-shadow: var(--shadow); border: 4px solid white; z-index: 2;">
+                        Since <br> 2015
+                    </div>
+                </div>
+                <div class="hero-text fade-up" style="padding-left: 20px;">
+                    <h5 style="color: var(--primary); font-weight: 700; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px;">Our Story</h5>
+                    <h2 style="font-size: 2.8rem; margin-bottom: 25px;">We Cook With <br> <span>Passion & Love.</span></h2>
+                    <p style="margin-bottom: 30px;">FreshBite started with a simple idea: healthy food shouldn't be boring. We partner with local farmers to bring you the freshest ingredients, cooked by expert chefs who care about every detail.</p>
+                    
+                    <ul style="margin-bottom: 35px;">
+                        <li style="margin-bottom: 15px; display: flex; align-items: center; gap: 15px; font-weight: 500;">
+                            <div style="width: 30px; height: 30px; background: rgba(78, 205, 196, 0.2); color: var(--secondary); border-radius: 50%; display: flex; align-items: center; justify-content: center;"><i class="fas fa-check"></i></div>
+                            <span>No Artificial Preservatives</span>
+                        </li>
+                        <li style="margin-bottom: 15px; display: flex; align-items: center; gap: 15px; font-weight: 500;">
+                            <div style="width: 30px; height: 30px; background: rgba(78, 205, 196, 0.2); color: var(--secondary); border-radius: 50%; display: flex; align-items: center; justify-content: center;"><i class="fas fa-check"></i></div>
+                            <span>100% Hormone-Free Meat</span>
+                        </li>
+                        <li style="margin-bottom: 15px; display: flex; align-items: center; gap: 15px; font-weight: 500;">
+                            <div style="width: 30px; height: 30px; background: rgba(78, 205, 196, 0.2); color: var(--secondary); border-radius: 50%; display: flex; align-items: center; justify-content: center;"><i class="fas fa-check"></i></div>
+                            <span>Eco-Friendly Packaging</span>
+                        </li>
+                    </ul>
+                    
+                    <a href="#" class="btn btn-primary">Read More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- App Download Section -->
+    <div class="container" id="app">
+        <section class="app-section fade-up">
+            <div class="pattern-overlay"></div>
+            <div class="app-grid">
+                <div class="app-text">
+                    <h2>Order from your pocket.</h2>
+                    <p style="opacity:0.9; margin-bottom:20px;">Get our app and enjoy exclusive discounts, order
+                        tracking, and faster checkout. Available on iOS and Android.</p>
+                    <div class="app-buttons">
+                        <a href="#" class="store-btn">
+                            <i class="fab fa-apple"></i>
+                            <div>
+                                <small style="display:block; font-size:0.6rem;">Download on the</small>
+                                <span style="font-weight:700; font-size:1rem;">App Store</span>
+                            </div>
+                        </a>
+                        <a href="#" class="store-btn">
+                            <i class="fab fa-google-play"></i>
+                            <div>
+                                <small style="display:block; font-size:0.6rem;">GET IT ON</small>
+                                <span style="font-weight:700; font-size:1rem;">Google Play</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="app-image" style="text-align:center;">
+                    <!-- Simple Mockup using CSS/HTML -->
+                    <div
+                        style="background:white; width:220px; height:400px; margin:0 auto; border-radius:30px; border:8px solid #333; overflow:hidden; position:relative; box-shadow: 0 20px 50px rgba(0,0,0,0.2);">
+                        <div
+                            style="background:#ddd; width:100%; height:100%; background: url('https://images.unsplash.com/photo-1555939594-58d7cb561ad1?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80'); background-size:cover;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <a href="#" class="footer-logo">Fresh<span>Bite.</span></a>
+                    <p style="opacity:0.7; font-size:0.95rem;">Our mission is to provide fresh, organic, and delicious
+                        meals to everyone, supporting local farmers and sustainability.</p>
+                    <div style="margin-top:20px; display:flex; gap:15px;">
+                        <a href="#" style="color:white;"><i class="fab fa-facebook"></i></a>
+                        <a href="#" style="color:white;"><i class="fab fa-twitter"></i></a>
+                        <a href="#" style="color:white;"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer">
+                    <h5>Company</h5>
+                    <ul class="footer-links">
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer">
+                    <h5>Support</h5>
+                    <ul class="footer-links">
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Shipping</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer">
+                    <h5>Newsletter</h5>
+                    <p style="font-size:0.9rem; opacity:0.7; margin-bottom:15px;">Subscribe to get 10% off your first
+                        order.</p>
+                    <form class="newsletter" onsubmit="event.preventDefault(); alert('Subscribed!')">
+                        <input type="email" placeholder="Enter your email">
+                        <button type="submit" class="btn btn-primary" style="width:100%;">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2025 FreshBite Inc. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Script for Scroll & Animation -->
+    <script>
+        // Sticky Navbar
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Intersection Observer for Animation
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+    </script>
+</body>
+
+</html>

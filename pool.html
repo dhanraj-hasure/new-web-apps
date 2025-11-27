@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AquaBlue | India's Luxury Pool Builders</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,600&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- CSS VARIABLES --- */
+        :root {
+            --primary: #0077b6;
+            /* Deep Ocean Blue */
+            --secondary: #00b4d8;
+            /* Bright Pool Blue */
+            --accent: #caf0f8;
+            /* Very Light Blue */
+            --gold: #d4a373;
+            /* Sand/Gold Accent */
+            --dark: #0f172a;
+            /* Dark Navy Text */
+            --light: #f8fafc;
+            --white: #ffffff;
+            --shadow: 0 10px 40px -10px rgba(0, 119, 182, 0.15);
+            --transition: all 0.4s ease;
+        }
+
+        /* --- RESET --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--dark);
+            background-color: var(--white);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-family: 'Playfair Display', serif;
+            color: var(--dark);
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+            object-fit: cover;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* --- UTILITIES --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-padding {
+            padding: 100px 0;
+        }
+
+        .bg-light {
+            background-color: var(--light);
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 16px 36px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 100%;
+            background: var(--dark);
+            z-index: -1;
+            transition: var(--transition);
+        }
+
+        .btn-primary:hover::before {
+            width: 100%;
+        }
+
+        .btn-outline {
+            border: 2px solid var(--white);
+            color: var(--white);
+            background: transparent;
+        }
+
+        .btn-outline:hover {
+            background: var(--white);
+            color: var(--primary);
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            padding: 20px 0;
+            transition: var(--transition);
+        }
+
+        nav.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+            padding: 15px 0;
+        }
+
+        .nav-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            font-family: 'Playfair Display', serif;
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        nav.scrolled .logo {
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+        }
+
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 500;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: var(--transition);
+        }
+
+        nav.scrolled .nav-links a {
+            color: var(--dark);
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary);
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1572331165267-854da2b00ca1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+            animation: kenburns 20s infinite alternate;
+        }
+
+        @keyframes kenburns {
+            from {
+                transform: scale(1);
+            }
+
+            to {
+                transform: scale(1.1);
+            }
+        }
+
+        .hero-content {
+            color: white;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .hero-content h1 {
+            font-size: 4.5rem;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            color: white;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        /* --- ABOUT SECTION --- */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-img-wrapper {
+            position: relative;
+        }
+
+        .about-main-img {
+            width: 90%;
+            border-radius: 5px;
+            box-shadow: var(--shadow);
+        }
+
+        .experience-badge {
+            position: absolute;
+            bottom: -30px;
+            right: 0;
+            background: var(--primary);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .experience-badge .years {
+            font-size: 3rem;
+            font-weight: 700;
+            line-height: 1;
+            display: block;
+        }
+
+        .section-subtitle {
+            color: var(--secondary);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: block;
+            margin-bottom: 15px;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 25px;
+            line-height: 1.2;
+        }
+
+        /* --- SERVICES --- */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background: white;
+            padding: 40px 30px;
+            border: 1px solid #eee;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            box-shadow: var(--shadow);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 25px;
+            transition: var(--transition);
+        }
+
+        .service-card:hover .service-icon {
+            color: var(--gold);
+        }
+
+        .service-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+        }
+
+        /* --- PORTFOLIO --- */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        .portfolio-item {
+            position: relative;
+            height: 350px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .portfolio-item:nth-child(1) {
+            grid-column: span 2;
+        }
+
+        .portfolio-item:nth-child(4) {
+            grid-column: span 2;
+        }
+
+        .portfolio-item img {
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s ease;
+        }
+
+        .portfolio-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0, 119, 182, 0.9), transparent);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 30px;
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .portfolio-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .portfolio-item:hover .portfolio-overlay {
+            opacity: 1;
+        }
+
+        .portfolio-overlay h4 {
+            color: white;
+            margin-bottom: 5px;
+            font-size: 1.2rem;
+        }
+
+        .portfolio-overlay p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+        }
+
+        /* --- PROCESS --- */
+        .process-steps {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            margin-top: 60px;
+        }
+
+        .process-steps::before {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: #e2e8f0;
+            z-index: 0;
+        }
+
+        .step {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            background: white;
+            padding: 0 15px;
+            flex: 1;
+        }
+
+        .step-number {
+            width: 80px;
+            height: 80px;
+            background: white;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0 auto 20px;
+            transition: var(--transition);
+        }
+
+        .step:hover .step-number {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* --- CONTACT --- */
+        .contact-section {
+            background: url('https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;
+            position: relative;
+        }
+
+        .contact-overlay {
+            background: rgba(15, 23, 42, 0.9);
+            position: absolute;
+            inset: 0;
+        }
+
+        .contact-container {
+            position: relative;
+            z-index: 2;
+            color: white;
+        }
+
+        .contact-form-wrapper {
+            background: white;
+            padding: 50px;
+            color: var(--dark);
+            max-width: 500px;
+            margin-left: auto;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #ddd;
+            background: #f9f9f9;
+            font-family: inherit;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: white;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background: #0f172a;
+            color: white;
+            padding: 60px 0 20px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 40px;
+        }
+
+        .footer-col h4 {
+            color: white;
+            margin-bottom: 20px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 12px;
+            color: #94a3b8;
+        }
+
+        .footer-col ul li i {
+            color: var(--secondary);
+            margin-right: 10px;
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 968px) {
+            .hero-content h1 {
+                font-size: 3rem;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-img-wrapper {
+                margin-bottom: 50px;
+            }
+
+            .portfolio-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .portfolio-item:nth-child(1),
+            .portfolio-item:nth-child(4) {
+                grid-column: span 1;
+            }
+
+            .process-steps {
+                flex-direction: column;
+                gap: 30px;
+                margin-top: 30px;
+            }
+
+            .process-steps::before {
+                display: none;
+            }
+
+            .contact-form-wrapper {
+                margin: 0 auto;
+                width: 100%;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+
+        /* Animation Classes */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="container nav-wrapper">
+            <a href="#" class="logo">
+                <i class="fas fa-water"></i> AquaBlue
+            </a>
+            <div class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#services">Services</a>
+                <a href="#portfolio">Projects</a>
+                <a href="#process">Process</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <a href="#contact" class="btn btn-primary" style="padding: 12px 25px; display: none;">Get Quote</a>
+            <!-- Mobile Menu Icon (Hidden in this desktop layout) -->
+            <div style="color:white; display:none;"><i class="fas fa-bars"></i></div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <h1 class="reveal">Dive into Luxury.</h1>
+            <p class="reveal">India's premier swimming pool construction & design company. We turn backyards into
+                private resorts.</p>
+            <div class="reveal">
+                <a href="#contact" class="btn btn-primary">Start Your Project</a>
+                <a href="#portfolio" class="btn btn-outline" style="margin-left: 15px;">View Gallery</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section-padding">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-img-wrapper reveal">
+                    <img src="https://images.unsplash.com/photo-1533422902779-aff35862e462?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                        alt="Luxury Pool Construction" class="about-main-img">
+                    <div class="experience-badge">
+                        <span class="years">15+</span>
+                        <span>Years of<br>Excellence</span>
+                    </div>
+                </div>
+                <div class="about-content reveal">
+                    <span class="section-subtitle">Who We Are</span>
+                    <h2 class="section-title">Crafting World-Class Pools Across India</h2>
+                    <p style="margin-bottom: 20px; color: #555;">
+                        At AquaBlue, we understand that a swimming pool is not just a water body—it's a lifestyle
+                        statement. Based in Hyderabad with operations across major Indian metros, we specialize in
+                        bespoke concrete pools, infinity edges, and smart pool technology.
+                    </p>
+                    <p style="margin-bottom: 30px; color: #555;">
+                        From the initial architectural blueprint to the final splash, our team of engineers and
+                        designers ensures leak-proof construction and stunning aesthetics.
+                    </p>
+                    <ul style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 30px;">
+                        <li><i class="fas fa-check-circle" style="color: var(--secondary); margin-right: 10px;"></i>
+                            Custom Design</li>
+                        <li><i class="fas fa-check-circle" style="color: var(--secondary); margin-right: 10px;"></i>
+                            Leak-Proof Guarantee</li>
+                        <li><i class="fas fa-check-circle" style="color: var(--secondary); margin-right: 10px;"></i>
+                            Premium Tiles</li>
+                        <li><i class="fas fa-check-circle" style="color: var(--secondary); margin-right: 10px;"></i>
+                            Automated Systems</li>
+                    </ul>
+                    <a href="#services" class="btn btn-primary" style="background: var(--dark);">Our Expertise</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="section-padding bg-light">
+        <div class="container">
+            <div class="reveal" style="text-align: center; max-width: 700px; margin: 0 auto 60px;">
+                <span class="section-subtitle">What We Do</span>
+                <h2 class="section-title">Complete Pool Solutions</h2>
+                <p>We provide end-to-end solutions, from residential plunge pools to olympic-sized commercial projects.
+                </p>
+            </div>
+
+            <div class="services-grid">
+                <!-- Service 1 -->
+                <div class="service-card reveal">
+                    <div class="service-icon"><i class="fas fa-swimming-pool"></i></div>
+                    <h3>New Construction</h3>
+                    <p>Custom-built concrete (Gunite) pools designed to fit your space perfectly. Infinity pools,
+                        skimmer pools, and overflow systems.</p>
+                </div>
+                <!-- Service 2 -->
+                <div class="service-card reveal">
+                    <div class="service-icon"><i class="fas fa-tools"></i></div>
+                    <h3>Renovation & Repair</h3>
+                    <p>Transform your old, outdated pool with modern tiling, resurfacing, LED lighting, and
+                        energy-efficient pumps.</p>
+                </div>
+                <!-- Service 3 -->
+                <div class="service-card reveal">
+                    <div class="service-icon"><i class="fas fa-water"></i></div>
+                    <h3>Maintenance AMC</h3>
+                    <p>Keep your water crystal clear with our Annual Maintenance Contracts. We handle chemical
+                        balancing, cleaning, and filtration.</p>
+                </div>
+                <!-- Service 4 -->
+                <div class="service-card reveal">
+                    <div class="service-icon"><i class="fas fa-spa"></i></div>
+                    <h3>Jacuzzi & Spa</h3>
+                    <p>Add a touch of relaxation with integrated heated Jacuzzis and spa jets alongside your main
+                        swimming pool.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio">
+        <div class="portfolio-grid">
+            <div class="portfolio-item">
+                <img src="https://images.unsplash.com/photo-1562778612-e1e0cda9915c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                    alt="Infinity Pool">
+                <div class="portfolio-overlay">
+                    <h4>The Skyline Infinity</h4>
+                    <p>Mumbai, MH</p>
+                </div>
+            </div>
+            <div class="portfolio-item">
+                <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                    alt="Villa Pool">
+                <div class="portfolio-overlay">
+                    <h4>Tropical Villa Retreat</h4>
+                    <p>Goa</p>
+                </div>
+            </div>
+            <div class="portfolio-item">
+                <img src="https://images.unsplash.com/photo-1532446708307-88f619b02447?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                    alt="Indoor Pool">
+                <div class="portfolio-overlay">
+                    <h4>Indoor Lap Pool</h4>
+                    <p>Bangalore, KA</p>
+                </div>
+            </div>
+            <div class="portfolio-item">
+                <img src="https://images.unsplash.com/photo-1614995955042-3a3f5a544521?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                    alt="Resort Pool">
+                <div class="portfolio-overlay">
+                    <h4>Grand Resort Project</h4>
+                    <p>Udaipur, RJ</p>
+                </div>
+            </div>
+            <div class="portfolio-item">
+                <img src="https://images.unsplash.com/photo-1582653288637-6d271f2513f8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                    alt="Garden Pool">
+                <div class="portfolio-overlay">
+                    <h4>Garden Plunge Pool</h4>
+                    <p>New Delhi</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section id="process" class="section-padding">
+        <div class="container">
+            <div class="reveal" style="text-align: center; margin-bottom: 60px;">
+                <span class="section-subtitle">How It Works</span>
+                <h2 class="section-title">Our Construction Process</h2>
+            </div>
+            <div class="process-steps reveal">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h4>Consultation</h4>
+                    <p style="font-size: 0.9rem; margin-top: 10px; color: #666;">Site visit and requirement analysis to
+                        understand your vision.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h4>Design 3D</h4>
+                    <p style="font-size: 0.9rem; margin-top: 10px; color: #666;">We create immersive 3D renders so you
+                        can see the final look.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h4>Excavation</h4>
+                    <p style="font-size: 0.9rem; margin-top: 10px; color: #666;">Earthwork and soil preparation begins
+                        with heavy machinery.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h4>Structuring</h4>
+                    <p style="font-size: 0.9rem; margin-top: 10px; color: #666;">Steel reinforcement, plumbing, and
+                        concreting (Gunite/Shotcrete).</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">5</div>
+                    <h4>Finishing</h4>
+                    <p style="font-size: 0.9rem; margin-top: 10px; color: #666;">Tiling, decking, lighting installation,
+                        and water filling.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section section-padding">
+        <div class="contact-overlay"></div>
+        <div class="container contact-container">
+            <div class="about-grid">
+                <div class="contact-info reveal">
+                    <h2 class="section-title" style="color: white;">Build Your Dream Pool Today</h2>
+                    <p style="margin-bottom: 30px; opacity: 0.9;">Ready to transform your property? Contact us for a
+                        free site consultation and estimate anywhere in India.</p>
+
+                    <div style="margin-bottom: 20px;">
+                        <i class="fas fa-phone-alt" style="color: var(--secondary); margin-right: 15px;"></i>
+                        <span style="font-size: 1.1rem;">+91 98765 43210</span>
+                    </div>
+                    <div style="margin-bottom: 20px;">
+                        <i class="fas fa-envelope" style="color: var(--secondary); margin-right: 15px;"></i>
+                        <span style="font-size: 1.1rem;">hello@aquabluepools.in</span>
+                    </div>
+                    <div style="margin-bottom: 40px;">
+                        <i class="fas fa-map-marker-alt" style="color: var(--secondary); margin-right: 15px;"></i>
+                        <span style="font-size: 1.1rem;">Jubilee Hills, Hyderabad, Telangana</span>
+                    </div>
+
+                    <div>
+                        <h4 style="color:white; margin-bottom: 15px;">We Work With:</h4>
+                        <div style="display: flex; gap: 20px; font-size: 1.5rem; opacity: 0.7;">
+                            <i class="fab fa-houzz"></i>
+                            <i class="fas fa-hotel"></i>
+                            <i class="fas fa-building"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-form-wrapper reveal">
+                    <h3 style="margin-bottom: 20px;">Get a Free Quote</h3>
+                    <form onsubmit="event.preventDefault(); alert('Thanks! We will call you shortly.');">
+                        <div class="form-group">
+                            <label>Name</label>
+                            <input type="text" placeholder="Your Name">
+                        </div>
+                        <div class="form-group">
+                            <label>Phone Number</label>
+                            <input type="tel" placeholder="+91">
+                        </div>
+                        <div class="form-group">
+                            <label>Pool Type</label>
+                            <select>
+                                <option>Residential Pool</option>
+                                <option>Commercial Pool</option>
+                                <option>Rooftop Pool</option>
+                                <option>Maintenance/Repair</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Message</label>
+                            <textarea rows="3" placeholder="Tell us about your requirements..."></textarea>
+                        </div>
+                        <button class="btn btn-primary" style="width: 100%;">Submit Request</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="logo" style="margin-bottom: 20px;">AquaBlue</div>
+                    <p style="color: #94a3b8; font-size: 0.9rem;">Leading the way in luxury swimming pool design and
+                        construction across India. Quality you can trust, beauty you can dive into.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><i class="fas fa-chevron-right"></i> <a href="#">Home</a></li>
+                        <li><i class="fas fa-chevron-right"></i> <a href="#">About Us</a></li>
+                        <li><i class="fas fa-chevron-right"></i> <a href="#">Projects</a></li>
+                        <li><i class="fas fa-chevron-right"></i> <a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><i class="fas fa-chevron-right"></i> Construction</li>
+                        <li><i class="fas fa-chevron-right"></i> Renovation</li>
+                        <li><i class="fas fa-chevron-right"></i> Jacuzzi Installation</li>
+                        <li><i class="fas fa-chevron-right"></i> Annual Maintenance</li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Connect</h4>
+                    <div style="display: flex; gap: 15px; margin-top: 10px;">
+                        <a href="#"
+                            style="background: rgba(255,255,255,0.1); width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; border-radius: 50%; color: white;"><i
+                                class="fab fa-facebook-f"></i></a>
+                        <a href="#"
+                            style="background: rgba(255,255,255,0.1); width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; border-radius: 50%; color: white;"><i
+                                class="fab fa-instagram"></i></a>
+                        <a href="#"
+                            style="background: rgba(255,255,255,0.1); width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; border-radius: 50%; color: white;"><i
+                                class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align: center; color: #64748b; font-size: 0.85rem;">
+                &copy; 2025 AquaBlue Constructions India Pvt Ltd. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Navbar Scroll Effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Reveal Animation
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 150;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        reveal(); // Trigger once on load
+    </script>
+</body>
+
+</html>
