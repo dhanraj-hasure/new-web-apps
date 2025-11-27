@@ -40,6 +40,10 @@
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: 'Poppins', sans-serif;
             background-color: var(--bg-cream);
@@ -185,7 +189,7 @@
             display: flex;
             align-items: center;
             position: relative;
-            padding-top: 80px;
+            padding-top: 120px;
         }
 
         /* Organic Background Shape */
@@ -514,8 +518,6 @@
             background: var(--dark);
             color: white;
             padding: 50px 0 20px;
-            border-top-left-radius: 40px;
-            border-top-right-radius: 40px;
         }
 
         .footer-grid {
@@ -605,15 +607,143 @@
             text-decoration: none;
         }
 
+        /* --- SCROLL TO TOP BUTTON --- */
+        .scroll-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary), #ff8787);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            z-index: 1000;
+        }
+
+        .scroll-to-top.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .scroll-to-top:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 12px 35px rgba(255, 107, 107, 0.6);
+            background: linear-gradient(135deg, #ff8787, var(--primary));
+        }
+
+        .scroll-to-top:active {
+            transform: translateY(-2px) scale(1.05);
+        }
+
+        .scroll-to-top::before {
+            content: '';
+            position: absolute;
+            font-size: 1.2rem;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-8px);
+            }
+        }
+
         /* --- RESPONSIVE --- */
-        @media (max-width: 768px) {
-            .hero-grid {
-                grid-template-columns: 1fr;
-                text-align: center;
+
+        /* Tablet */
+        @media (max-width: 1024px) {
+            .container {
+                padding: 0 1.5rem;
             }
 
             .hero-text h1 {
-                font-size: 2.8rem;
+                font-size: 3.5rem;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+            }
+
+            .dishes-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 25px;
+            }
+
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 30px;
+            }
+        }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1rem;
+            }
+
+            .section-padding {
+                padding: 60px 0;
+            }
+
+            nav {
+                padding: 15px 0;
+            }
+
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .nav-actions a {
+                padding: 8px 20px !important;
+                font-size: 0.9rem;
+            }
+
+            .hero {
+                min-height: auto;
+                padding-top: 100px;
+                padding-bottom: 160px;
+            }
+
+            .hero-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 30px;
+            }
+
+            .hero-text h1 {
+                font-size: 2.5rem;
+                line-height: 1.2;
+            }
+
+            .hero-text p {
+                font-size: 1rem;
+                max-width: 100%;
+            }
+
+            .hero-text h4 {
+                font-size: 0.9rem;
             }
 
             .hero-bg-shape {
@@ -624,38 +754,147 @@
                 border-radius: 300px 300px 0 0;
             }
 
-            .nav-links {
-                display: none;
-            }
-
-            .app-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .footer-grid {
-                grid-template-columns: 1fr;
-                gap: 30px;
-            }
-
             .floating-card {
                 display: none;
             }
 
-            .order-buttons {
-                flex-direction: column;
+            .section-title {
+                font-size: 2rem;
+                margin-bottom: 40px;
+            }
+
+            .category-grid {
+                gap: 15px;
+                justify-content: center;
+            }
+
+            .cat-card {
+                width: 140px;
+                height: 180px;
+                padding: 20px;
+            }
+
+            .cat-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+                margin-bottom: 15px;
+            }
+
+            .cat-card h4 {
+                font-size: 0.9rem;
             }
 
             .dishes-grid {
                 grid-template-columns: 1fr;
-            }
-
-            .category-grid {
                 gap: 20px;
             }
 
-            .cat-card {
-                width: 150px;
+            .dish-img {
                 height: 200px;
+            }
+
+            .order-buttons {
+                flex-direction: row;
+                gap: 8px;
+            }
+
+            .order-btn {
+                font-size: 0.8rem;
+                padding: 8px;
+            }
+
+            .app-section {
+                padding: 40px 20px;
+                border-radius: 30px;
+            }
+
+            .app-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .app-text h2 {
+                font-size: 2rem;
+            }
+
+            .app-text p {
+                font-size: 0.9rem;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+            footer {
+                padding: 40px 0 20px;
+                border-top-left-radius: 30px;
+                border-top-right-radius: 30px;
+            }
+
+            .footer-logo {
+                font-size: 1.6rem;
+            }
+
+            footer h5 {
+                font-size: 1rem;
+                margin-bottom: 12px;
+            }
+
+            .copyright {
+                font-size: 0.8rem;
+                padding-top: 15px;
+            }
+        }
+
+        /* Small Mobile */
+        @media (max-width: 480px) {
+            .hero-text h1 {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .cat-card {
+                width: 120px;
+                height: 160px;
+            }
+
+            .btn {
+                padding: 12px 25px;
+                font-size: 0.9rem;
+            }
+
+            .order-buttons {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .app-text h2 {
+                font-size: 1.8rem;
+            }
+
+            .dish-content {
+                padding: 20px;
+            }
+
+            .price {
+                font-size: 1rem;
+            }
+
+            .scroll-to-top {
+                width: 50px;
+                height: 50px;
+                bottom: 20px;
+                right: 20px;
+                font-size: 1.2rem;
+            }
+
+            .scroll-to-top::before {
+                font-size: 1rem;
             }
         }
 
@@ -698,10 +937,12 @@
             <div class="hero-text fade-up">
                 <h4><i class="fas fa-leaf" style="color:var(--secondary)"></i> Authentic Maharashtrian Cuisine</h4>
                 <h1>Traditional Flavors, <br> Made With Love.</h1>
-                <p>Experience the authentic taste of Maharashtra with our homemade specialties. From Piran Poli to Bhakri, every dish is crafted with traditional recipes and fresh ingredients. Order now on Swiggy or Zomato!</p>
+                <p>Experience the authentic taste of Maharashtra with our homemade specialties. From Piran Poli to
+                    Bhakri, every dish is crafted with traditional recipes and fresh ingredients. Order now on Swiggy or
+                    Zomato!</p>
                 <div style="display: flex; gap: 15px; margin-top: 30px;">
-                    <a href="#menu" class="btn btn-primary btn-icon">
-                        View Menu <i class="fas fa-arrow-right"></i>
+                    <a href="#" class="btn btn-primary btn-icon">
+                        <i class="fas fa-motorcycle"></i> Order on Zomato
                     </a>
                     <a href="#" class="btn" style="background: #FC8019; color: white;">
                         <i class="fas fa-motorcycle"></i> Order on Swiggy
@@ -712,13 +953,16 @@
                         <!-- Avatars -->
                         <div
                             style="width:40px; height:40px; border-radius:50%; background:#ddd; border:2px solid white; overflow:hidden;">
-                            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt=""></div>
+                            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="">
+                        </div>
                         <div
                             style="width:40px; height:40px; border-radius:50%; background:#ddd; border:2px solid white; overflow:hidden; margin-left:-10px;">
-                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt=""></div>
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="">
+                        </div>
                         <div
                             style="width:40px; height:40px; border-radius:50%; background:#ddd; border:2px solid white; overflow:hidden; margin-left:-10px;">
-                            <img src="https://randomuser.me/api/portraits/women/68.jpg" alt=""></div>
+                            <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="">
+                        </div>
                     </div>
                     <span style="font-weight: 600; font-size: 0.9rem;">15k+ Happy Customers</span>
                 </div>
@@ -726,8 +970,8 @@
 
             <div class="hero-image fade-up">
                 <!-- Blob shape image -->
-                <img src="https://gavran-eats.netlify.app/images/hero-thali.jpg"
-                    alt="Authentic Maharashtrian Thali" onerror="this.src='https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=800&q=80'">
+                <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=800&q=80" alt="Authentic Maharashtrian Thali"
+                    onerror="this.src='https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=800&q=80'">
 
                 <!-- Floating Element -->
                 <div class="floating-card">
@@ -795,15 +1039,16 @@
         <div class="container">
             <div class="section-title fade-up">
                 <h2>Our Authentic <span>Menu</span></h2>
-                <p style="font-size: 1rem; color: #666; margin-top: 15px;">Traditional Maharashtrian delicacies made with love and fresh ingredients</p>
+                <p style="font-size: 1rem; color: #666; margin-top: 15px;">Traditional Maharashtrian delicacies made
+                    with love and fresh ingredients</p>
             </div>
 
             <div class="dishes-grid">
                 <!-- Dish 1 -->
                 <div class="dish-card fade-up">
                     <div class="dish-img">
-                        <img src="https://gavran-eats.netlify.app/images/piran-poli.jpg"
-                            alt="Piran Poli" onerror="this.src='https://images.unsplash.com/photo-1626074353765-517a681e40be?w=600&q=80'">
+                        <img src="https://gavran-eats.netlify.app/images/piran-poli.jpg" alt="Piran Poli"
+                            onerror="this.src='https://images.unsplash.com/photo-1626074353765-517a681e40be?w=600&q=80'">
                     </div>
                     <div class="dish-content">
                         <div class="dish-header">
@@ -818,7 +1063,8 @@
                             <i class="fas fa-star"></i>
                             <span style="color:#999; margin-left:5px;">(342)</span>
                         </div>
-                        <p style="font-size:0.9rem; color:#666; margin-bottom:15px;">Traditional sweet flatbread stuffed with jaggery and lentil filling. A Maharashtrian delicacy served with ghee.</p>
+                        <p style="font-size:0.9rem; color:#666; margin-bottom:15px;">Traditional sweet flatbread stuffed
+                            with jaggery and lentil filling. A Maharashtrian delicacy served with ghee.</p>
                         <div class="order-buttons">
                             <button class="order-btn swiggy-btn" onclick="window.open('#', '_blank')">
                                 <i class="fas fa-motorcycle"></i> Swiggy
@@ -831,7 +1077,7 @@
                 </div>
 
                 <!-- Dish 2 -->
-                <div class="dish-card fade-up">
+                <!-- <div class="dish-card fade-up">
                     <div class="dish-img">
                         <img src="https://gavran-eats.netlify.app/images/bhakri.jpg"
                             alt="Bhakri">
@@ -859,13 +1105,13 @@
                             </button>
                         </div>
                     </div>
-                </div>
+                </div> -->
 
                 <!-- Dish 3 -->
                 <div class="dish-card fade-up">
                     <div class="dish-img">
-                        <img src="https://gavran-eats.netlify.app/images/varan-bhaat.jpg"
-                            alt="Varan Bhaat" onerror="this.src='https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=600&q=80'">
+                        <img src="https://gavran-eats.netlify.app/images/varan-bhaat.jpg" alt="Varan Bhaat"
+                            onerror="this.src='https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=600&q=80'">
                     </div>
                     <div class="dish-content">
                         <div class="dish-header">
@@ -880,7 +1126,8 @@
                             <i class="fas fa-star-half-alt"></i>
                             <span style="color:#999; margin-left:5px;">(267)</span>
                         </div>
-                        <p style="font-size:0.9rem; color:#666; margin-bottom:15px;">Simple yet comforting dal and rice combo with ghee tadka. The ultimate Maharashtrian comfort food.</p>
+                        <p style="font-size:0.9rem; color:#666; margin-bottom:15px;">Simple yet comforting dal and rice
+                            combo with ghee tadka. The ultimate Maharashtrian comfort food.</p>
                         <div class="order-buttons">
                             <button class="order-btn swiggy-btn" onclick="window.open('#', '_blank')">
                                 <i class="fas fa-motorcycle"></i> Swiggy
@@ -895,8 +1142,8 @@
                 <!-- Dish 4 -->
                 <div class="dish-card fade-up">
                     <div class="dish-img">
-                        <img src="https://gavran-eats.netlify.app/images/misal-pav.jpg"
-                            alt="Misal Pav" onerror="this.src='https://images.unsplash.com/photo-1601050690597-df0568f70950?w=600&q=80'">
+                        <img src="https://gavran-eats.netlify.app/images/misal-pav.jpg" alt="Misal Pav"
+                            onerror="this.src='https://images.unsplash.com/photo-1601050690597-df0568f70950?w=600&q=80'">
                     </div>
                     <div class="dish-content">
                         <div class="dish-header">
@@ -911,7 +1158,8 @@
                             <i class="fas fa-star"></i>
                             <span style="color:#999; margin-left:5px;">(412)</span>
                         </div>
-                        <p style="font-size:0.9rem; color:#666; margin-bottom:15px;">Spicy sprouted lentil curry topped with farsan, onions, and lemon. Served with soft pav bread.</p>
+                        <p style="font-size:0.9rem; color:#666; margin-bottom:15px;">Spicy sprouted lentil curry topped
+                            with farsan, onions, and lemon. Served with soft pav bread.</p>
                         <div class="order-buttons">
                             <button class="order-btn swiggy-btn" onclick="window.open('#', '_blank')">
                                 <i class="fas fa-motorcycle"></i> Swiggy
@@ -926,8 +1174,8 @@
                 <!-- Dish 5 -->
                 <div class="dish-card fade-up">
                     <div class="dish-img">
-                        <img src="https://gavran-eats.netlify.app/images/puran-poli.jpg"
-                            alt="Puran Poli" onerror="this.src='https://images.unsplash.com/photo-1626074353765-517a681e40be?w=600&q=80'">
+                        <img src="https://gavran-eats.netlify.app/images/puran-poli.jpg" alt="Puran Poli"
+                            onerror="this.src='https://images.unsplash.com/photo-1626074353765-517a681e40be?w=600&q=80'">
                     </div>
                     <div class="dish-content">
                         <div class="dish-header">
@@ -942,7 +1190,8 @@
                             <i class="fas fa-star"></i>
                             <span style="color:#999; margin-left:5px;">(356)</span>
                         </div>
-                        <p style="font-size:0.9rem; color:#666; margin-bottom:15px;">Sweet flatbread stuffed with chana dal and jaggery filling. Served warm with a dollop of ghee.</p>
+                        <p style="font-size:0.9rem; color:#666; margin-bottom:15px;">Sweet flatbread stuffed with chana
+                            dal and jaggery filling. Served warm with a dollop of ghee.</p>
                         <div class="order-buttons">
                             <button class="order-btn swiggy-btn" onclick="window.open('#', '_blank')">
                                 <i class="fas fa-motorcycle"></i> Swiggy
@@ -957,8 +1206,8 @@
                 <!-- Dish 6 -->
                 <div class="dish-card fade-up">
                     <div class="dish-img">
-                        <img src="https://gavran-eats.netlify.app/images/batata-vada.jpg"
-                            alt="Batata Vada" onerror="this.src='https://images.unsplash.com/photo-1601050690597-df0568f70950?w=600&q=80'">
+                        <img src="https://gavran-eats.netlify.app/images/batata-vada.jpg" alt="Batata Vada"
+                            onerror="this.src='https://images.unsplash.com/photo-1601050690597-df0568f70950?w=600&q=80'">
                     </div>
                     <div class="dish-content">
                         <div class="dish-header">
@@ -973,7 +1222,8 @@
                             <i class="fas fa-star-half-alt"></i>
                             <span style="color:#999; margin-left:5px;">(523)</span>
                         </div>
-                        <p style="font-size:0.9rem; color:#666; margin-bottom:15px;">Mumbai's iconic street food! Spiced potato fritter in a soft bun with chutneys. Quick, tasty, and filling.</p>
+                        <p style="font-size:0.9rem; color:#666; margin-bottom:15px;">Mumbai's iconic street food! Spiced
+                            potato fritter in a soft bun with chutneys. Quick, tasty, and filling.</p>
                         <div class="order-buttons">
                             <button class="order-btn swiggy-btn" onclick="window.open('#', '_blank')">
                                 <i class="fas fa-motorcycle"></i> Swiggy
@@ -986,7 +1236,7 @@
                 </div>
 
                 <!-- Dish 7 -->
-                <div class="dish-card fade-up">
+                <!-- <div class="dish-card fade-up">
                     <div class="dish-img">
                         <img src="https://gavran-eats.netlify.app/images/thalipeeth.jpg"
                             alt="Thalipeeth">
@@ -1014,13 +1264,13 @@
                             </button>
                         </div>
                     </div>
-                </div>
+                </div> -->
 
                 <!-- Dish 8 -->
                 <div class="dish-card fade-up">
                     <div class="dish-img">
-                        <img src="https://gavran-eats.netlify.app/images/sabudana-khichdi.jpg"
-                            alt="Sabudana Khichdi" onerror="this.src='https://images.unsplash.com/photo-1626074353765-517a681e40be?w=600&q=80'">
+                        <img src="https://gavran-eats.netlify.app/images/sabudana-khichdi.jpg" alt="Sabudana Khichdi"
+                            onerror="this.src='https://images.unsplash.com/photo-1626074353765-517a681e40be?w=600&q=80'">
                     </div>
                     <div class="dish-content">
                         <div class="dish-header">
@@ -1035,7 +1285,8 @@
                             <i class="fas fa-star"></i>
                             <span style="color:#999; margin-left:5px;">(234)</span>
                         </div>
-                        <p style="font-size:0.9rem; color:#666; margin-bottom:15px;">Fasting special! Sago pearls cooked with peanuts, potatoes, and mild spices. Light and delicious.</p>
+                        <p style="font-size:0.9rem; color:#666; margin-bottom:15px;">Fasting special! Sago pearls cooked
+                            with peanuts, potatoes, and mild spices. Light and delicious.</p>
                         <div class="order-buttons">
                             <button class="order-btn swiggy-btn" onclick="window.open('#', '_blank')">
                                 <i class="fas fa-motorcycle"></i> Swiggy
@@ -1050,8 +1301,8 @@
                 <!-- Dish 9 -->
                 <div class="dish-card fade-up">
                     <div class="dish-img">
-                        <img src="https://gavran-eats.netlify.app/images/modak.jpg"
-                            alt="Modak" onerror="this.src='https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=600&q=80'">
+                        <img src="https://gavran-eats.netlify.app/images/modak.jpg" alt="Modak"
+                            onerror="this.src='https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=600&q=80'">
                     </div>
                     <div class="dish-content">
                         <div class="dish-header">
@@ -1066,7 +1317,8 @@
                             <i class="fas fa-star"></i>
                             <span style="color:#999; margin-left:5px;">(445)</span>
                         </div>
-                        <p style="font-size:0.9rem; color:#666; margin-bottom:15px;">Steamed rice dumplings filled with coconut and jaggery. Lord Ganesha's favorite sweet treat!</p>
+                        <p style="font-size:0.9rem; color:#666; margin-bottom:15px;">Steamed rice dumplings filled with
+                            coconut and jaggery. Lord Ganesha's favorite sweet treat!</p>
                         <div class="order-buttons">
                             <button class="order-btn swiggy-btn" onclick="window.open('#', '_blank')">
                                 <i class="fas fa-motorcycle"></i> Swiggy
@@ -1074,6 +1326,57 @@
                             <button class="order-btn zomato-btn" onclick="window.open('#', '_blank')">
                                 <i class="fas fa-utensils"></i> Zomato
                             </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dish-card fade-up">
+                    <div class="dish-img">
+                        <img src="https://gavran-eats.netlify.app/images/varan-bhaat.jpg" alt="Varan Bhaat"
+                            onerror="this.src='https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=600&q=80'">
+                    </div>
+                    <div class="dish-content">
+                        <div class="dish-header">
+                            <h3>Varan Bhaat</h3>
+                            <span class="price">₹100</span>
+                        </div>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span style="color:#999; margin-left:5px;">(267)</span>
+                        </div>
+                        <p style="font-size:0.9rem; color:#666; margin-bottom:15px;">Simple yet comforting dal and rice
+                            combo with ghee tadka. The ultimate Maharashtrian comfort food.</p>
+                        <div class="order-buttons">
+                            <button class="order-btn swiggy-btn" onclick="window.open('#', '_blank')">
+                                <i class="fas fa-motorcycle"></i> Swiggy
+                            </button>
+                            <button class="order-btn zomato-btn" onclick="window.open('#', '_blank')">
+                                <i class="fas fa-utensils"></i> Zomato
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="dish-card fade-up">
+                    <div class="dish-img"> <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=800&q=80" alt="Biryani">
+                    </div>
+                    <div class="dish-content">
+                        <div class="dish-header">
+                            <h3>Biryani</h3> <span class="price">₹180</span>
+                        </div>
+                        <div class="rating"> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i
+                                class="fas fa-star"></i> <i class="fas fa-star"></i> <i
+                                class="fas fa-star-half-alt"></i> <span
+                                style="color:#999; margin-left:5px;">(1,542)</span> </div>
+                        <p style="font-size:0.9rem; color:#666; margin-bottom:15px;">Aromatic basmati rice cooked with
+                            rich spices, tender meat, and fried onions. A timeless Indian favorite.</p>
+                        <div class="order-buttons"> <button class="order-btn swiggy-btn"
+                                onclick="window.open('#', '_blank')"> <i class="fas fa-motorcycle"></i> Swiggy </button>
+                            <button class="order-btn zomato-btn" onclick="window.open('#', '_blank')"> <i
+                                    class="fas fa-utensils"></i> Zomato </button>
                         </div>
                     </div>
                 </div>
@@ -1088,34 +1391,57 @@
                 <div class="hero-image fade-up">
                     <img src="/image.png" alt="Chefs Cooking" style="border-radius: 30px; box-shadow: var(--shadow);">
                     <!-- Decorative Badge -->
-                    <div style="position: absolute; top: 30px; right: -20px; background: var(--yellow); width: 100px; height: 100px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-align: center; font-weight: 700; font-family: 'DM Serif Display', serif; transform: rotate(15deg); box-shadow: var(--shadow); border: 4px solid white; z-index: 2;">
+                    <div
+                        style="position: absolute; top: 30px; right: -20px; background: var(--yellow); width: 100px; height: 100px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-align: center; font-weight: 700; font-family: 'DM Serif Display', serif; transform: rotate(15deg); box-shadow: var(--shadow); border: 4px solid white; z-index: 2;">
                         Since <br> 2015
                     </div>
                 </div>
                 <div class="hero-text fade-up" style="padding-left: 20px;">
-                    <h5 style="color: var(--primary); font-weight: 700; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px;">Our Story</h5>
-                    <h2 style="font-size: 2.8rem; margin-bottom: 25px;">Authentic Flavors, <br> <span>Made With Love.</span></h2>
-                    <p style="margin-bottom: 30px;">Gavran Eats was born from a passion for authentic home-style cooking. We believe that great food brings people together. Our chefs use traditional recipes passed down through generations, combined with the freshest local ingredients to create meals that taste just like home.</p>
-                    
+                    <h5
+                        style="color: var(--primary); font-weight: 700; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px;">
+                        Our Story</h5>
+                    <h2 style="font-size: 2.8rem; margin-bottom: 25px;">Authentic Flavors, <br> <span>Made With
+                            Love.</span></h2>
+                    <p style="margin-bottom: 30px;">Gavran Eats was born from a passion for authentic home-style
+                        cooking. We believe that great food brings people together. Our chefs use traditional recipes
+                        passed down through generations, combined with the freshest local ingredients to create meals
+                        that taste just like home.</p>
+
                     <ul style="margin-bottom: 35px;">
-                        <li style="margin-bottom: 15px; display: flex; align-items: center; gap: 15px; font-weight: 500;">
-                            <div style="width: 30px; height: 30px; background: rgba(78, 205, 196, 0.2); color: var(--secondary); border-radius: 50%; display: flex; align-items: center; justify-content: center;"><i class="fas fa-check"></i></div>
+                        <li
+                            style="margin-bottom: 15px; display: flex; align-items: center; gap: 15px; font-weight: 500;">
+                            <div
+                                style="width: 30px; height: 30px; background: rgba(78, 205, 196, 0.2); color: var(--secondary); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                                <i class="fas fa-check"></i>
+                            </div>
                             <span>Traditional Family Recipes</span>
                         </li>
-                        <li style="margin-bottom: 15px; display: flex; align-items: center; gap: 15px; font-weight: 500;">
-                            <div style="width: 30px; height: 30px; background: rgba(78, 205, 196, 0.2); color: var(--secondary); border-radius: 50%; display: flex; align-items: center; justify-content: center;"><i class="fas fa-check"></i></div>
+                        <li
+                            style="margin-bottom: 15px; display: flex; align-items: center; gap: 15px; font-weight: 500;">
+                            <div
+                                style="width: 30px; height: 30px; background: rgba(78, 205, 196, 0.2); color: var(--secondary); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                                <i class="fas fa-check"></i>
+                            </div>
                             <span>Fresh, Quality Ingredients</span>
                         </li>
-                        <li style="margin-bottom: 15px; display: flex; align-items: center; gap: 15px; font-weight: 500;">
-                            <div style="width: 30px; height: 30px; background: rgba(78, 205, 196, 0.2); color: var(--secondary); border-radius: 50%; display: flex; align-items: center; justify-content: center;"><i class="fas fa-check"></i></div>
+                        <li
+                            style="margin-bottom: 15px; display: flex; align-items: center; gap: 15px; font-weight: 500;">
+                            <div
+                                style="width: 30px; height: 30px; background: rgba(78, 205, 196, 0.2); color: var(--secondary); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                                <i class="fas fa-check"></i>
+                            </div>
                             <span>Hygienic Kitchen Standards</span>
                         </li>
-                        <li style="margin-bottom: 15px; display: flex; align-items: center; gap: 15px; font-weight: 500;">
-                            <div style="width: 30px; height: 30px; background: rgba(78, 205, 196, 0.2); color: var(--secondary); border-radius: 50%; display: flex; align-items: center; justify-content: center;"><i class="fas fa-check"></i></div>
+                        <li
+                            style="margin-bottom: 15px; display: flex; align-items: center; gap: 15px; font-weight: 500;">
+                            <div
+                                style="width: 30px; height: 30px; background: rgba(78, 205, 196, 0.2); color: var(--secondary); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                                <i class="fas fa-check"></i>
+                            </div>
                             <span>Fast & Reliable Delivery</span>
                         </li>
                     </ul>
-                    
+
                     <a href="#" class="btn btn-primary">Read More</a>
                 </div>
             </div>
@@ -1129,16 +1455,20 @@
             <div class="app-grid">
                 <div class="app-text">
                     <h2>Order Your Favorites Now!</h2>
-                    <p style="opacity:0.9; margin-bottom:30px;">Craving authentic Maharashtrian food? Order Gavran Eats on your favorite food delivery platforms. Fast delivery, fresh food, and traditional taste guaranteed!</p>
+                    <p style="opacity:0.9; margin-bottom:30px;">Craving authentic Maharashtrian food? Order Gavran Eats
+                        on your favorite food delivery platforms. Fast delivery, fresh food, and traditional taste
+                        guaranteed!</p>
                     <div style="display: flex; gap: 20px; flex-wrap: wrap;">
-                        <a href="#" class="btn" style="background: #FC8019; color: white; padding: 18px 40px; font-size: 1.1rem; display: flex; align-items: center; gap: 12px;">
+                        <a href="#" class="btn"
+                            style="background: #FC8019; color: white; padding: 18px 40px; font-size: 1.1rem; display: flex; align-items: center; gap: 12px;">
                             <i class="fas fa-motorcycle" style="font-size: 1.5rem;"></i>
                             <div style="text-align: left;">
                                 <small style="display:block; font-size:0.7rem; opacity:0.9;">Order on</small>
                                 <span style="font-weight:700;">Swiggy</span>
                             </div>
                         </a>
-                        <a href="#" class="btn" style="background: #E23744; color: white; padding: 18px 40px; font-size: 1.1rem; display: flex; align-items: center; gap: 12px;">
+                        <a href="#" class="btn"
+                            style="background: #E23744; color: white; padding: 18px 40px; font-size: 1.1rem; display: flex; align-items: center; gap: 12px;">
                             <i class="fas fa-utensils" style="font-size: 1.5rem;"></i>
                             <div style="text-align: left;">
                                 <small style="display:block; font-size:0.7rem; opacity:0.9;">Order on</small>
@@ -1147,15 +1477,16 @@
                         </a>
                     </div>
                     <p style="margin-top: 25px; font-size: 0.9rem; opacity: 0.8;">
-                        <i class="fas fa-clock"></i> Delivery in 30-45 minutes | 
-                        <i class="fas fa-shield-alt"></i> Hygienic packaging | 
+                        <i class="fas fa-clock"></i> Delivery in 30-45 minutes |
+                        <i class="fas fa-shield-alt"></i> Hygienic packaging |
                         <i class="fas fa-star"></i> 4.5+ ratings
                     </p>
                 </div>
-                <div class="app-image" style="text-align:center; display: flex; align-items: center; justify-content: center;">
-                    <img src="https://gavran-eats.netlify.app/images/delivery.png" alt="Food Delivery" 
-                         onerror="this.src='https://images.unsplash.com/photo-1526367790999-0150786686a2?w=400&q=80'"
-                         style="max-width: 100%; height: auto; border-radius: 20px;">
+                <div class="app-image"
+                    style="text-align:center; display: flex; align-items: center; justify-content: center;">
+                    <img src="https://gavran-eats.netlify.app/images/delivery.png" alt="Food Delivery"
+                        onerror="this.src='https://images.unsplash.com/photo-1526367790999-0150786686a2?w=400&q=80'"
+                        style="max-width: 100%; height: auto; border-radius: 20px;">
                 </div>
             </div>
         </section>
@@ -1167,15 +1498,24 @@
             <div class="footer-grid">
                 <div>
                     <a href="#" class="footer-logo">Gavran<span>Eats</span></a>
-                    <p style="opacity:0.7; font-size:0.9rem; margin-bottom: 15px;">Authentic Maharashtrian cuisine delivered fresh to your door.</p>
+                    <p style="opacity:0.7; font-size:0.9rem; margin-bottom: 15px;">Authentic Maharashtrian cuisine
+                        delivered fresh to your door.</p>
                     <div style="margin-bottom: 15px;">
-                        <p style="opacity:0.8; font-size:0.85rem; margin-bottom:5px;"><i class="fas fa-phone" style="color:var(--primary); margin-right:8px;"></i> +91 98765 43210</p>
-                        <p style="opacity:0.8; font-size:0.85rem;"><i class="fas fa-envelope" style="color:var(--primary); margin-right:8px;"></i> hello@gavraneats.com</p>
+                        <p style="opacity:0.8; font-size:0.85rem; margin-bottom:5px;"><i class="fas fa-phone"
+                                style="color:var(--primary); margin-right:8px;"></i> +91 98765 43210</p>
+                        <p style="opacity:0.8; font-size:0.85rem;"><i class="fas fa-envelope"
+                                style="color:var(--primary); margin-right:8px;"></i> hello@gavraneats.com</p>
                     </div>
                     <div style="display:flex; gap:12px;">
-                        <a href="#" style="color:white; font-size:1.2rem; transition: 0.3s;" onmouseover="this.style.color='var(--secondary)'" onmouseout="this.style.color='white'"><i class="fab fa-facebook"></i></a>
-                        <a href="#" style="color:white; font-size:1.2rem; transition: 0.3s;" onmouseover="this.style.color='var(--secondary)'" onmouseout="this.style.color='white'"><i class="fab fa-instagram"></i></a>
-                        <a href="#" style="color:white; font-size:1.2rem; transition: 0.3s;" onmouseover="this.style.color='var(--secondary)'" onmouseout="this.style.color='white'"><i class="fab fa-twitter"></i></a>
+                        <a href="#" style="color:white; font-size:1.2rem; transition: 0.3s;"
+                            onmouseover="this.style.color='var(--secondary)'" onmouseout="this.style.color='white'"><i
+                                class="fab fa-facebook"></i></a>
+                        <a href="#" style="color:white; font-size:1.2rem; transition: 0.3s;"
+                            onmouseover="this.style.color='var(--secondary)'" onmouseout="this.style.color='white'"><i
+                                class="fab fa-instagram"></i></a>
+                        <a href="#" style="color:white; font-size:1.2rem; transition: 0.3s;"
+                            onmouseover="this.style.color='var(--secondary)'" onmouseout="this.style.color='white'"><i
+                                class="fab fa-twitter"></i></a>
                     </div>
                 </div>
                 <div class="footer">
@@ -1190,10 +1530,13 @@
                 <div class="footer">
                     <h5>Order On</h5>
                     <ul class="footer-links">
-                        <li><a href="#"><i class="fas fa-motorcycle" style="color:#FC8019; margin-right:5px;"></i> Swiggy</a></li>
-                        <li><a href="#"><i class="fas fa-utensils" style="color:#E23744; margin-right:5px;"></i> Zomato</a></li>
+                        <li><a href="#"><i class="fas fa-motorcycle" style="color:#FC8019; margin-right:5px;"></i>
+                                Swiggy</a></li>
+                        <li><a href="#"><i class="fas fa-utensils" style="color:#E23744; margin-right:5px;"></i>
+                                Zomato</a></li>
                     </ul>
-                    <p style="font-size:0.85rem; opacity:0.7; margin-top: 15px;">Mon-Sat: 8 AM - 10 PM<br>Sun: 8 AM - 9 PM</p>
+                    <p style="font-size:0.85rem; opacity:0.7; margin-top: 15px;">Mon-Sat: 8 AM - 10 PM<br>Sun: 8 AM - 9
+                        PM</p>
                 </div>
                 <div class="footer">
                     <h5>Newsletter</h5>
@@ -1205,10 +1548,30 @@
                 </div>
             </div>
             <div class="copyright">
-                &copy; 2025 Gavran Eats. Made with ❤️ | <a href="#" style="opacity:0.7;">Privacy</a> | <a href="#" style="opacity:0.7;">Terms</a>
+                <div style="margin-bottom: 20px;">
+                    &copy; 2025 Gavran Eats. Made with ❤️ for Foodies
+                </div>
+                <div
+                    style="display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 0.95rem; padding: 15px 25px; background: rgba(78, 205, 196, 0.15); border-radius: 12px; border: 1px solid rgba(78, 205, 196, 0.3); max-width: fit-content; margin: 0 auto; box-shadow: 0 4px 15px rgba(78, 205, 196, 0.2);">
+                    <span style="opacity: 0.9; color: white;">Developed by</span>
+                    <a href="https://srione-technologies.netlify.app/" target="_blank" rel="noopener noreferrer"
+                        style="display: flex; align-items: center; gap: 8px; transition: all 0.3s; color: var(--secondary); font-weight: 700; text-shadow: 0 2px 4px rgba(0,0,0,0.2);"
+                        onmouseover="this.style.transform='scale(1.08)'; this.style.color='var(--yellow)'"
+                        onmouseout="this.style.transform='scale(1)'; this.style.color='var(--secondary)'">
+                        <img src="https://srione-technologies.netlify.app/logo.png" alt="SriOne Technologies"
+                            onerror="this.style.display='none'"
+                            style="height: 26px; width: auto; filter: brightness(0) invert(1) drop-shadow(0 2px 4px rgba(0,0,0,0.3));">
+                        <span>SriOne Technologies</span>
+                    </a>
+                </div>
             </div>
         </div>
     </footer>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-to-top" id="scrollToTop" aria-label="Scroll to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
 
     <!-- Script for Scroll & Animation -->
     <script>
@@ -1232,6 +1595,24 @@
         }, { threshold: 0.1 });
 
         document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+        // Scroll to Top Button
+        const scrollToTopBtn = document.getElementById('scrollToTop');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                scrollToTopBtn.classList.add('show');
+            } else {
+                scrollToTopBtn.classList.remove('show');
+            }
+        });
+
+        scrollToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
     </script>
 </body>
 
